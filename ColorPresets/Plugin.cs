@@ -1,4 +1,5 @@
-﻿using IPA;
+﻿using HarmonyLib;
+using IPA;
 using IPA.Config;
 using IPA.Config.Stores;
 using System;
@@ -8,6 +9,10 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using IPALogger = IPA.Logging.Logger;
+using System.Reflection;
+using ColorPresets.Configuration;
+using BeatSaberMarkupLanguage.Settings;
+using BeatSaberMarkupLanguage.GameplaySetup;
 
 namespace ColorPresets
 {
@@ -15,6 +20,8 @@ namespace ColorPresets
     public class Plugin
     {
         internal static Plugin Instance { get; private set; }
+
+        internal static Harmony harmony { get; private set; }
         internal static IPALogger Log { get; private set; }
 
         [Init]
@@ -23,11 +30,13 @@ namespace ColorPresets
         /// [Init] methods that use a Constructor or called before regular methods like InitWithConfig.
         /// Only use [Init] with one Constructor.
         /// </summary>
-        public void Init(IPALogger logger)
+        public void Init(IPALogger logger, IPA.Config.Config conf)
         {
             Instance = this;
             Log = logger;
             Log.Info("ColorPresets initialized.");
+            harmony = new Harmony("Bela.BeatSaber.ColorPresets");
+            PluginConfig.Instance = conf.Generated<PluginConfig>();
         }
 
         #region BSIPA Config
@@ -45,16 +54,24 @@ namespace ColorPresets
         [OnStart]
         public void OnApplicationStart()
         {
-            Log.Debug("OnApplicationStart");
+            // Log.Debug("OnApplicationStart");
             new GameObject("ColorPresetsController").AddComponent<ColorPresetsController>();
+            harmony.PatchAll(Assembly.GetExecutingAssembly());
+            
+            BSMLSettings.instance.AddSettingsMenu("ColorPresets", "ColorPresets.Views.Settings.bsml", PluginConfig.Instance);
 
+            if (PluginConfig.Instance.isEnabled) GameplaySetup.instance.AddTab("ColorPresets", "ColorPresets.Views.GameplaySetup.bsml", PluginConfig.Instance, MenuType.All);
+
+            Log.Info("ColorPresets loaded successfully");
         }
 
         [OnExit]
-        public void OnApplicationQuit()
+        public void OnApplicationStop()
         {
-            Log.Debug("OnApplicationQuit");
-
+            // Log.Debug("OnApplicationQuit");
+            harmony.UnpatchSelf();
+            // BSMLSettings.instance.RemoveSettingsMenu(PluginConfig.Instance);
+            // GameplaySetup.instance.RemoveTab("ColorPresets");
         }
     }
 }

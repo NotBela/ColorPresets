@@ -1,0 +1,7 @@
+﻿<settings-container>
+	<checkbox-setting
+		apply-on-change="true"
+		value ="isEnabled"
+		text ="Enable Plugin"
+	/>
+</settings-container>

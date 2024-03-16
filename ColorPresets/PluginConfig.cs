@@ -1,5 +1,6 @@
-﻿/*
+﻿using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using BeatSaberMarkupLanguage.GameplaySetup;
 using IPA.Config.Stores;
 
 [assembly: InternalsVisibleTo(GeneratedStore.AssemblyVisibilityTarget)]
@@ -8,14 +9,18 @@ namespace ColorPresets.Configuration
     internal class PluginConfig
     {
         public static PluginConfig Instance { get; set; }
-        public virtual int IntValue { get; set; } = 42; // Must be 'virtual' if you want BSIPA to detect a value change and save the config automatically.
+
+        public virtual bool isEnabled { get; set; } = true;
+
+        // to do: add color list<t> to config
 
         /// <summary>
         /// This is called whenever BSIPA reads the config from disk (including when file changes are detected).
         /// </summary>
         public virtual void OnReload()
         {
-            // Do stuff after config is read from disk.
+            
+            
         }
 
         /// <summary>
@@ -24,6 +29,11 @@ namespace ColorPresets.Configuration
         public virtual void Changed()
         {
             // Do stuff when the config is changed.
+            if (!isEnabled)
+            {
+                GameplaySetup.instance.RemoveTab("ColorPresets");
+            }
+            else GameplaySetup.instance.AddTab("ColorPresets", "ColorPresets.Views.GameplaySetup.bsml", PluginConfig.Instance, MenuType.All);
         }
 
         /// <summary>
@@ -35,4 +45,3 @@ namespace ColorPresets.Configuration
         }
     }
 }
-*/
