@@ -1,3 +1,8 @@
 ﻿<settings-container child-control-width="true" child-expand-width="true">
-	<text text ="put things here at some point...."/>
+	<dropdown-list-setting
+		text="Colors"
+		apply-on-change ="true"
+		options="colorsList"
+		value="colorSelected"
+	/>
 </settings-container>

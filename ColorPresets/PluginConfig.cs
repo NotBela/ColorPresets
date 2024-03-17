@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using BeatSaberMarkupLanguage.GameplaySetup;
 using IPA.Config.Stores;
+using IPA.Config.Stores.Attributes;
 
 [assembly: InternalsVisibleTo(GeneratedStore.AssemblyVisibilityTarget)]
 namespace ColorPresets.Configuration
@@ -12,7 +14,12 @@ namespace ColorPresets.Configuration
 
         public virtual bool isEnabled { get; set; } = true;
 
-        // to do: add color list<t> to config
+        public virtual int colorPresetsCreated { get; set; } = 0;
+
+        public virtual string selected { get; set; } = "NewPreset0";
+
+        [NonNullable]
+        public virtual List<ColorPreset.ColorPreset> colorsList { get; set; } = new List<ColorPreset.ColorPreset>() {new ColorPreset.ColorPreset("NewPreset0")}.ToList();
 
         /// <summary>
         /// This is called whenever BSIPA reads the config from disk (including when file changes are detected).
