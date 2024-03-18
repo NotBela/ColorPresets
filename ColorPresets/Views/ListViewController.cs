@@ -22,10 +22,10 @@ namespace ColorPresets.Views
         private DropDownListSetting list = new DropDownListSetting();
 
         [UIValue("listOptions")]
-        private List<object> listOptions = ColorPreset.ColorPreset.namesOfPresets();
+        private List<object> listOptions = PluginConfig.Instance.presets;
 
         [UIValue("listChoice")]
-        private string listChoice = PluginConfig.Instance.selected.toString();
+        private object listChoice = PluginConfig.Instance.presets[0]; //PluginConfig.Instance.selected;
 
         [UIAction("newPresetButtonClicked")]
         private void newPresetButton()

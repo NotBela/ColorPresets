@@ -28,15 +28,15 @@ namespace ColorPresets.ColorPreset
             return name;
         }
 
-        public static List<object> namesOfPresets()
-        {
-            List<object> list = new List<object>();
-            foreach(var preset in PluginConfig.Instance.presets)
-            {
-                list.Add(preset.toString());
-            }
+        //public static List<object> namesOfPresets()
+        //{
+        //    List<object> list = new List<object>();
+        //    foreach(var preset in PluginConfig.Instance.presets)
+        //    {
+        //        list.Add(preset.toString());
+        //    }
 
-            return list;
-        }
+        //    return list;
+        //}
     }
 }

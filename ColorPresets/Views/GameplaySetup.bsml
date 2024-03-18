@@ -4,7 +4,7 @@
 		text="Colors"
 		value="listChoice"
 		options="listOptions"
-		on-change="true"
+		apply-on-change="true"
 	/>
 	<button text="New Preset" on-click="newPresetButtonClicked"/>
 </scrollable-settings-container>

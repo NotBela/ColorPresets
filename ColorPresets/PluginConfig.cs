@@ -6,6 +6,7 @@ using ColorPresets.Views;
 using IPA.Config.Stores;
 using IPA.Config.Stores.Attributes;
 using Unity.Collections;
+using IPA.Config.Stores.Converters;
 
 [assembly: InternalsVisibleTo(GeneratedStore.AssemblyVisibilityTarget)]
 namespace ColorPresets.Configuration
@@ -16,13 +17,11 @@ namespace ColorPresets.Configuration
 
         public virtual bool isEnabled { get; set; } = true;
 
-        public virtual ColorPreset.ColorPreset selected { get; set; } = PluginConfig.Instance.presets[0];
+        // public virtual object selected { get; set; } = PluginConfig.Instance.presets[0];
 
-        [UseConverter(typeof(ColorPreset.ColorPreset))]
-        public virtual List<ColorPreset.ColorPreset> presets { get; set; } = new List<ColorPreset.ColorPreset> {new ColorPreset.ColorPreset("NewPreset0")}.ToList();
-
-        // [NonNullable]
-        // public virtual List<ColorPreset.ColorPreset> presetsList { get; set; } = new List<ColorPreset.ColorPreset>() {new ColorPreset.ColorPreset("NewPreset0")};
+        [UseConverter(typeof(ListConverter<string>))]
+        [NonNullable]
+        public virtual List<object> presets { get; set; } = new List<object>() { "hello", "hi"}.ToList();
 
         /// <summary>
         /// This is called whenever BSIPA reads the config from disk (including when file changes are detected).
