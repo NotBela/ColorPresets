@@ -1,8 +1,10 @@
-﻿<settings-container child-control-width="true" child-expand-width="true">
-	<dropdown-list-setting
+﻿<scrollable-settings-container>
+	<dropdown-list-setting 
+		id="colorPresetsDropDown"
 		text="Colors"
-		apply-on-change ="true"
-		options="colorsList"
-		value="colorSelected"
+		value="listChoice"
+		options="listOptions"
+		on-change="true"
 	/>
-</settings-container>
+	<button text="New Preset" on-click="newPresetButtonClicked"/>
+</scrollable-settings-container>

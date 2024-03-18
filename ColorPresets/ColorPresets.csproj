@@ -107,7 +107,7 @@
     <Compile Include="PluginConfig.cs" />
     <Compile Include="ColorPresetsController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\BSMLViewController1.cs" />
+    <Compile Include="Views\ListViewController.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="manifest.json" />
@@ -118,7 +118,7 @@
     <EmbeddedResource Include="Views\Settings.bsml" />
     <EmbeddedResource Include="Views\GameplaySetup.bsml" />
     <EmbeddedResource Include="Views\BSMLViewController1.bsml">
-      <DependentUpon>BSMLViewController1.cs</DependentUpon>
+      <DependentUpon>ListViewController.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

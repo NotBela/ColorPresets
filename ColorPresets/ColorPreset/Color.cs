@@ -42,7 +42,7 @@ namespace ColorPresets.ColorPreset
         public static ColorPreset findInstanceFromName(String name)
         {
             IEnumerable<ColorPreset> iterator = 
-                from scheme in PluginConfig.Instance.colorsList 
+                from scheme in PluginConfig.Instance.presets
                 where scheme.name == name 
                 select scheme;
 
@@ -52,13 +52,27 @@ namespace ColorPresets.ColorPreset
         public static bool containsInstanceFromName(String name)
         {
             IEnumerable<ColorPreset> iterator =
-                from scheme in PluginConfig.Instance.colorsList
+                from scheme in PluginConfig.Instance.presets
                 where scheme.name == name
                 select scheme;
 
             if (iterator.Count() > 0) return true;
 
             return false;
+        }
+
+        public static List<object> schemeNamesToList()
+        {
+            List<object> returnList = new List<object>();
+            foreach (var item in PluginConfig.Instance.presets)
+            {
+                if (item != null && item is ColorPreset)
+                {
+                    returnList.Add(item.name);
+                }
+            }
+
+            return returnList;
         }
 
     }

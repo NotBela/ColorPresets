@@ -13,6 +13,7 @@ using System.Reflection;
 using ColorPresets.Configuration;
 using BeatSaberMarkupLanguage.Settings;
 using BeatSaberMarkupLanguage.GameplaySetup;
+using ColorPresets.Views;
 
 namespace ColorPresets
 {
@@ -34,11 +35,11 @@ namespace ColorPresets
         {
             Instance = this;
             Log = logger;
-            Log.Info("ColorPresets initialized.");
+            // Log.Info("ColorPresets initialized.");
             harmony = new Harmony("Bela.BeatSaber.ColorPresets");
             PluginConfig.Instance = conf.Generated<PluginConfig>();
         }
-
+        
         #region BSIPA Config
         //Uncomment to use BSIPA's config
         /*
@@ -59,8 +60,9 @@ namespace ColorPresets
             harmony.PatchAll(Assembly.GetExecutingAssembly());
             
             BSMLSettings.instance.AddSettingsMenu("ColorPresets", "ColorPresets.Views.Settings.bsml", PluginConfig.Instance);
+            ListViewController listViewController = new ListViewController();
 
-            if (PluginConfig.Instance.isEnabled) GameplaySetup.instance.AddTab("ColorPresets", "ColorPresets.Views.GameplaySetup.bsml", PluginConfig.Instance, MenuType.All);
+            if (PluginConfig.Instance.isEnabled) GameplaySetup.instance.AddTab("ColorPresets", "ColorPresets.Views.GameplaySetup.bsml", listViewController, MenuType.All);
 
             Log.Info("ColorPresets loaded successfully");
         }

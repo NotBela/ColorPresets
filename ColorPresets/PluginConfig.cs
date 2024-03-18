@@ -2,8 +2,10 @@
 using System.Linq;
 using System.Runtime.CompilerServices;
 using BeatSaberMarkupLanguage.GameplaySetup;
+using ColorPresets.Views;
 using IPA.Config.Stores;
 using IPA.Config.Stores.Attributes;
+using Unity.Collections;
 
 [assembly: InternalsVisibleTo(GeneratedStore.AssemblyVisibilityTarget)]
 namespace ColorPresets.Configuration
@@ -14,12 +16,12 @@ namespace ColorPresets.Configuration
 
         public virtual bool isEnabled { get; set; } = true;
 
-        public virtual int colorPresetsCreated { get; set; } = 0;
-
         public virtual string selected { get; set; } = "NewPreset0";
 
-        [NonNullable]
-        public virtual List<ColorPreset.ColorPreset> colorsList { get; set; } = new List<ColorPreset.ColorPreset>() {new ColorPreset.ColorPreset("NewPreset0")}.ToList();
+        public virtual List<object> presets { get; set; } = new object[] {new ColorPreset.ColorPreset("NewPreset0")}.ToList();
+
+        // [NonNullable]
+        // public virtual List<ColorPreset.ColorPreset> presetsList { get; set; } = new List<ColorPreset.ColorPreset>() {new ColorPreset.ColorPreset("NewPreset0")};
 
         /// <summary>
         /// This is called whenever BSIPA reads the config from disk (including when file changes are detected).
@@ -40,7 +42,11 @@ namespace ColorPresets.Configuration
             {
                 GameplaySetup.instance.RemoveTab("ColorPresets");
             }
-            else GameplaySetup.instance.AddTab("ColorPresets", "ColorPresets.Views.GameplaySetup.bsml", PluginConfig.Instance, MenuType.All);
+            else
+            {
+                ListViewController listViewController = new ListViewController();
+                GameplaySetup.instance.AddTab("ColorPresets", "ColorPresets.Views.GameplaySetup.bsml", listViewController, MenuType.All);
+            }
         }
 
         /// <summary>
