@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IPA;
+﻿using System.Collections.Generic;
 using IPA.Utilities;
 using System.IO;
-using System.Diagnostics;
-using System.Runtime.Serialization.Json;
 using UnityEngine;
-using static UnityEngine.JsonUtility;
 
 namespace ColorPresets.PresetConfig
 {
@@ -19,7 +11,7 @@ namespace ColorPresets.PresetConfig
 
         public static void makeFolder()
         {
-            if (Directory.Exists(pathToFolder))
+            if (!Directory.Exists(pathToFolder))
             {
                 Directory.CreateDirectory(pathToFolder);
                 writeToPreset(new ColorPreset.ColorPreset("NewPreset0"));
@@ -38,16 +30,14 @@ namespace ColorPresets.PresetConfig
                 list.Add(Path.GetFileNameWithoutExtension(file));
             }
 
+            if (fileListWithPath.Length == 0) return new List<string>() { "You have no presets!" };
+
             return list;
         }
 
         public static void writeToPreset(ColorPreset.ColorPreset preset)
         {
-
-
-            string json = JsonUtility.ToJson(preset);
-
-            File.WriteAllText(pathToFolder + preset + ".json", json);
+            File.WriteAllText(pathToFolder + preset + ".json", ColorPreset.ColorPreset.toJson(preset));
         }
 
         public static ColorPreset.ColorPreset readPreset(string jsonName)

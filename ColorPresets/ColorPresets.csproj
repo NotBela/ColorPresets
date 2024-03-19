@@ -112,6 +112,7 @@
     <Compile Include="Plugin.cs" />
     <Compile Include="PluginConfig.cs" />
     <Compile Include="ColorPresetsController.cs" />
+    <Compile Include="PresetConfig\OtherUtils.cs" />
     <Compile Include="PresetConfig\PresetSaveLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\ListViewController.cs" />
@@ -135,6 +136,8 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

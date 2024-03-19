@@ -33,7 +33,7 @@ namespace ColorPresets.Views
         private void newPresetButton()
         {
             // PluginConfig.Instance.presets.Add(new ColorPreset.ColorPreset("NewPreset1"));
-            Plugin.Log.Info("button pressed!!! wow!!!");
+            PresetSaveLoader.writeToPreset(new ColorPreset.ColorPreset($"NewPreset{OtherUtils.findNewPresetCount()}"));
         }
 
         // [UIAction("#apply")]

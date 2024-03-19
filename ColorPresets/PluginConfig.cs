@@ -7,6 +7,7 @@ using IPA.Config.Stores;
 using IPA.Config.Stores.Attributes;
 using Unity.Collections;
 using IPA.Config.Stores.Converters;
+using ColorPresets.PresetConfig;
 
 [assembly: InternalsVisibleTo(GeneratedStore.AssemblyVisibilityTarget)]
 namespace ColorPresets.Configuration
