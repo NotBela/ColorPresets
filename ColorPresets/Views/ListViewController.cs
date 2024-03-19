@@ -27,17 +27,18 @@ namespace ColorPresets.Views
         public List<object> listOptions = new List<object>(PresetSaveLoader.getListOfAllPresets());
 
         [UIValue("listChoice")]
-        private object listChoice = PluginConfig.Instance.selected; // PluginConfig.Instance.selected as object; //PluginConfig.Instance.selected;
+        private object listChoice = PluginConfig.Instance.selected;
 
         [UIAction("newPresetButtonClicked")]
         private void newPresetButton()
         {
             // PluginConfig.Instance.presets.Add(new ColorPreset.ColorPreset("NewPreset1"));
             PresetSaveLoader.writeToPreset(new ColorPreset.ColorPreset($"NewPreset{OtherUtils.findNewPresetCount()}"));
+            updateListOptions();
         }
-
-        // [UIAction("#apply")]
-        // public void OnApply() => Logger.log.Info($"list-choice value applied, now: {listChoice}");
+        internal void updateListOptions()
+        {
+            listOptions = new List<object>(PresetSaveLoader.getListOfAllPresets());
+        }
     }
-
 }

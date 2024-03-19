@@ -24,7 +24,7 @@ namespace ColorPresets.Configuration
         // public virtual List<ColorPreset.ColorPreset> presets { get; set; } = new List<ColorPreset.ColorPreset>() { new ColorPreset.ColorPreset("NewPreset0"), new ColorPreset.ColorPreset("newPreset1") }.ToList();
 
         [NonNullable]
-        public virtual string selected { get; set; }
+        public virtual string selected { get; set; } = "NewPreset0";
 
         /// <summary>
         /// This is called whenever BSIPA reads the config from disk (including when file changes are detected).
