@@ -6,6 +6,7 @@ using BeatSaberMarkupLanguage.Macros;
 using BeatSaberMarkupLanguage.ViewControllers;
 using ColorPresets.ColorPreset;
 using ColorPresets.Configuration;
+using ColorPresets.PresetConfig;
 using IPA.Logging;
 using JetBrains.Annotations;
 using System;
@@ -23,7 +24,7 @@ namespace ColorPresets.Views
         private DropDownListSetting list = new DropDownListSetting();
 
         [UIValue("listOptions")]
-        public List<object> listOptions = new List<object>(PluginConfig.Instance.presets);
+        public List<object> listOptions = new List<object>(PresetSaveLoader.getListOfAllPresets());
 
         [UIValue("listChoice")]
         private object listChoice = PluginConfig.Instance.selected; // PluginConfig.Instance.selected as object; //PluginConfig.Instance.selected;

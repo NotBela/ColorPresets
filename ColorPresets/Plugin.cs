@@ -14,6 +14,7 @@ using ColorPresets.Configuration;
 using BeatSaberMarkupLanguage.Settings;
 using BeatSaberMarkupLanguage.GameplaySetup;
 using ColorPresets.Views;
+using ColorPresets.PresetConfig;
 
 namespace ColorPresets
 {
@@ -60,6 +61,7 @@ namespace ColorPresets
             harmony.PatchAll(Assembly.GetExecutingAssembly());
             
             BSMLSettings.instance.AddSettingsMenu("ColorPresets", "ColorPresets.Views.Settings.bsml", PluginConfig.Instance);
+            PresetSaveLoader.makeFolder();
             ListViewController listViewController = new ListViewController();
 
             if (PluginConfig.Instance.isEnabled) GameplaySetup.instance.AddTab("ColorPresets", "ColorPresets.Views.GameplaySetup.bsml", listViewController, MenuType.All);

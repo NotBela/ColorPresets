@@ -23,31 +23,21 @@ namespace ColorPresets.ColorPreset
         {
             this.name = name;
         }
+
+        public ColorPreset(string name, Color leftSaber, Color rightSaber, Color lightOne, Color lightTwo, Color wall, Color boostOne, Color boostTwo)
+        {
+            this.name = name;
+            this.leftSaber = leftSaber;
+            this.rightSaber = rightSaber;
+            this.lightOne = lightOne;
+            this.lightTwo = lightTwo;
+            this.wall = wall;  
+            this.boostOne = boostOne;
+            this.boostTwo = boostTwo;
+        }
         public override string ToString()
         {
             return name;
         }
-
-        public static List<object> convertToStringList()
-        {
-            List<object> list = new List<object>();
-
-            //foreach(var preset in PluginConfig.Instance.presets)
-            //{
-            //    // list.Add(preset.ToString());
-            //}
-            return list;
-        }
-
-        //public static List<object> namesOfPresets()
-        //{
-        //    List<object> list = new List<object>();
-        //    foreach(var preset in PluginConfig.Instance.presets)
-        //    {
-        //        list.Add(preset.toString());
-        //    }
-
-        //    return list;
-        //}
     }
 }

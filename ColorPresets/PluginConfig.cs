@@ -18,9 +18,9 @@ namespace ColorPresets.Configuration
 
         public virtual bool isEnabled { get; set; } = true;
 
-        [UseConverter(typeof(ListConverter<string>))]
-        [NonNullable]
-        public virtual List<ColorPreset.ColorPreset> presets { get; set; } = new List<ColorPreset.ColorPreset>() { new ColorPreset.ColorPreset("NewPreset0"), new ColorPreset.ColorPreset("newPreset1") }.ToList();
+        // [UseConverter(typeof(ListConverter<string>))]
+        // [NonNullable]
+        // public virtual List<ColorPreset.ColorPreset> presets { get; set; } = new List<ColorPreset.ColorPreset>() { new ColorPreset.ColorPreset("NewPreset0"), new ColorPreset.ColorPreset("newPreset1") }.ToList();
 
         [NonNullable]
         public virtual string selected { get; set; } = "NewPreset0";
