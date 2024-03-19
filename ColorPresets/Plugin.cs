@@ -16,6 +16,7 @@ using BeatSaberMarkupLanguage.GameplaySetup;
 using ColorPresets.Views;
 using ColorPresets.PresetConfig;
 
+
 namespace ColorPresets
 {
     [Plugin(RuntimeOptions.SingleStartInit)]
