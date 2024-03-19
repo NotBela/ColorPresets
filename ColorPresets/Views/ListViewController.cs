@@ -35,9 +35,11 @@ namespace ColorPresets.Views
         private void newPresetButton()
         {
             // PluginConfig.Instance.presets.Add(new ColorPreset.ColorPreset("NewPreset1"));
-            PresetSaveLoader.writeToPreset(new ColorPreset.ColorPreset($"NewPreset{OtherUtils.findNewPresetCount()}"));
             list.values = new List<object> (PresetSaveLoader.getListOfAllPresets());
+            PluginConfig.Instance.selected = PresetSaveLoader.writeToPreset(new ColorPreset.ColorPreset($"NewPreset{OtherUtils.findNewPresetCount()}"));
             list.UpdateChoices();
+            list.dropdown.SelectCellWithIdx(listOptions.Count() - 1);
+
         }
     }
 }

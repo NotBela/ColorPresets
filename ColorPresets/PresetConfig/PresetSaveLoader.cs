@@ -35,9 +35,13 @@ namespace ColorPresets.PresetConfig
             return list;
         }
 
-        public static void writeToPreset(ColorPreset.ColorPreset preset)
+        public static string writeToPreset(ColorPreset.ColorPreset preset)
         {
-            File.WriteAllText(pathToFolder + preset + ".json", ColorPreset.ColorPreset.toJson(preset));
+            List<object> list = new List<object>() { preset };
+
+            File.WriteAllText(pathToFolder + preset + ".json", JsonUtility.ToJson(list));
+
+            return preset.ToString();
         }
 
         public static ColorPreset.ColorPreset readPreset(string jsonName)

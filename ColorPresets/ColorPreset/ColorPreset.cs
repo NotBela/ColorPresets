@@ -1,10 +1,4 @@
-﻿using ColorPresets.Configuration;
-using Microsoft.SqlServer.Server;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using UnityEngine;
 
 namespace ColorPresets.ColorPreset
@@ -26,12 +20,12 @@ namespace ColorPresets.ColorPreset
 
         public ColorPreset(string name)
         {
-            this._name = name;
+            _name = name;
         }
 
         public ColorPreset(string name, Color leftSaber, Color rightSaber, Color lightOne, Color lightTwo, Color wall, Color boostOne, Color boostTwo)
         {
-            this._name = name;
+            _name = name;
             this.leftSaber = leftSaber;
             this.rightSaber = rightSaber;
             this.lightOne = lightOne;
