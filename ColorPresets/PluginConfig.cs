@@ -13,15 +13,17 @@ namespace ColorPresets.Configuration
 {
     internal class PluginConfig
     {
+
         public static PluginConfig Instance { get; set; }
 
         public virtual bool isEnabled { get; set; } = true;
 
-        // public virtual object selected { get; set; } = PluginConfig.Instance.presets[0];
-
         [UseConverter(typeof(ListConverter<string>))]
         [NonNullable]
-        public virtual List<object> presets { get; set; } = new List<object>() { "hello", "hi"}.ToList();
+        public virtual List<ColorPreset.ColorPreset> presets { get; set; } = new List<ColorPreset.ColorPreset>() { new ColorPreset.ColorPreset("NewPreset0"), new ColorPreset.ColorPreset("newPreset1") }.ToList();
+
+        [NonNullable]
+        public virtual string selected { get; set; } = "NewPreset0";
 
         /// <summary>
         /// This is called whenever BSIPA reads the config from disk (including when file changes are detected).

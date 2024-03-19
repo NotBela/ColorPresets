@@ -23,9 +23,20 @@ namespace ColorPresets.ColorPreset
         {
             this.name = name;
         }
-        public string toString()
+        public override string ToString()
         {
             return name;
+        }
+
+        public static List<object> convertToStringList()
+        {
+            List<object> list = new List<object>();
+
+            //foreach(var preset in PluginConfig.Instance.presets)
+            //{
+            //    // list.Add(preset.ToString());
+            //}
+            return list;
         }
 
         //public static List<object> namesOfPresets()

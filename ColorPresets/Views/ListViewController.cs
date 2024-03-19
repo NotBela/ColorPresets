@@ -11,6 +11,7 @@ using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Collections;
 
 
 namespace ColorPresets.Views
@@ -22,15 +23,16 @@ namespace ColorPresets.Views
         private DropDownListSetting list = new DropDownListSetting();
 
         [UIValue("listOptions")]
-        private List<object> listOptions = PluginConfig.Instance.presets;
+        public List<object> listOptions = new List<object>(PluginConfig.Instance.presets);
 
         [UIValue("listChoice")]
-        private object listChoice = PluginConfig.Instance.presets[0]; //PluginConfig.Instance.selected;
+        private object listChoice = PluginConfig.Instance.selected; // PluginConfig.Instance.selected as object; //PluginConfig.Instance.selected;
 
         [UIAction("newPresetButtonClicked")]
         private void newPresetButton()
         {
-            PluginConfig.Instance.presets.Add(new ColorPreset.ColorPreset("NewPreset1"));
+            // PluginConfig.Instance.presets.Add(new ColorPreset.ColorPreset("NewPreset1"));
+            Plugin.Log.Info("button pressed!!! wow!!!");
         }
 
         // [UIAction("#apply")]
