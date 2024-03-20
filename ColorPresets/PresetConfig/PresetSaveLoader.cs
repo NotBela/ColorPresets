@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IPA;
+﻿using System.Collections.Generic;
 using IPA.Utilities;
 using System.IO;
-using System.Diagnostics;
-using System.Runtime.Serialization.Json;
-using Newtonsoft.Json;
+using UnityEngine;
 
 namespace ColorPresets.PresetConfig
 {
@@ -18,36 +11,53 @@ namespace ColorPresets.PresetConfig
 
         public static void makeFolder()
         {
-            if (Directory.Exists(pathToFolder)) { }
-            try
+            if (!Directory.Exists(pathToFolder))
             {
                 Directory.CreateDirectory(pathToFolder);
                 writeToPreset(new ColorPreset.ColorPreset("NewPreset0"));
             }
-            catch
-            {
-                throw new Exception("CouldNotCreateDirException");
-                
-            }
+
         }
 
         public static List<string> getListOfAllPresets()
         {
-            List<string> list = new List<string>(Directory.GetFiles(pathToFolder));
+            string[] fileListWithPath = Directory.GetFiles(pathToFolder);
+
+            List<string> list = new List<string>();
+
+            foreach (string file in fileListWithPath)
+            {
+                list.Add(Path.GetFileNameWithoutExtension(file));
+            }
+
+            if (fileListWithPath.Length == 0) return new List<string>() { "You have no presets!" };
 
             return list;
         }
 
-        public static void writeToPreset(ColorPreset.ColorPreset preset)
+        public static string writeToPreset(ColorPreset.ColorPreset preset)
         {
-            string json = JsonConvert.SerializeObject(preset);
+            List<ColorPreset.ColorPreset> list = new List<ColorPreset.ColorPreset>();
 
-            File.WriteAllText(Path.Combine(pathToFolder, preset.ToString()), json + ".json");
+            list.Add(new ColorPreset.ColorPreset("testName")
+            {
+                leftSaber = preset.leftSaber,
+                rightSaber = preset.rightSaber,
+                lightOne = preset.lightOne,
+                lightTwo = preset.lightTwo,
+                wall = preset.wall,
+                boostOne = preset.boostOne,
+                boostTwo = preset.boostTwo,
+            });
+
+            File.WriteAllText(pathToFolder + preset.ToString() + ".json", JsonUtility.ToJson(list));
+
+            return preset.ToString();
         }
 
         public static ColorPreset.ColorPreset readPreset(string jsonName)
         {
-            ColorPreset.ColorPreset jsonDeserialized = JsonConvert.DeserializeObject<ColorPreset.ColorPreset>(jsonName);
+            ColorPreset.ColorPreset jsonDeserialized = JsonUtility.FromJson<ColorPreset.ColorPreset>(pathToFolder + jsonName + ".json");
 
             return jsonDeserialized;
         }

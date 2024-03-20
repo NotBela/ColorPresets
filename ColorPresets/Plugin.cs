@@ -16,6 +16,7 @@ using BeatSaberMarkupLanguage.GameplaySetup;
 using ColorPresets.Views;
 using ColorPresets.PresetConfig;
 
+
 namespace ColorPresets
 {
     [Plugin(RuntimeOptions.SingleStartInit)]
@@ -38,6 +39,7 @@ namespace ColorPresets
             Log = logger;
             // Log.Info("ColorPresets initialized.");
             harmony = new Harmony("Bela.BeatSaber.ColorPresets");
+            PresetSaveLoader.makeFolder();
             PluginConfig.Instance = conf.Generated<PluginConfig>();
         }
         
@@ -59,9 +61,8 @@ namespace ColorPresets
             // Log.Debug("OnApplicationStart");
             new GameObject("ColorPresetsController").AddComponent<ColorPresetsController>();
             harmony.PatchAll(Assembly.GetExecutingAssembly());
-            
+
             BSMLSettings.instance.AddSettingsMenu("ColorPresets", "ColorPresets.Views.Settings.bsml", PluginConfig.Instance);
-            PresetSaveLoader.makeFolder();
             ListViewController listViewController = new ListViewController();
 
             if (PluginConfig.Instance.isEnabled) GameplaySetup.instance.AddTab("ColorPresets", "ColorPresets.Views.GameplaySetup.bsml", listViewController, MenuType.All);

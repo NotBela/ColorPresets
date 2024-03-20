@@ -7,6 +7,7 @@ using BeatSaberMarkupLanguage.ViewControllers;
 using ColorPresets.ColorPreset;
 using ColorPresets.Configuration;
 using ColorPresets.PresetConfig;
+using IPA;
 using IPA.Logging;
 using JetBrains.Annotations;
 using System;
@@ -27,17 +28,25 @@ namespace ColorPresets.Views
         public List<object> listOptions = new List<object>(PresetSaveLoader.getListOfAllPresets());
 
         [UIValue("listChoice")]
-        private object listChoice = PluginConfig.Instance.selected; // PluginConfig.Instance.selected as object; //PluginConfig.Instance.selected;
+        private object listChoice = PluginConfig.Instance.selected;
+
+        
 
         [UIAction("newPresetButtonClicked")]
         private void newPresetButton()
         {
-            // PluginConfig.Instance.presets.Add(new ColorPreset.ColorPreset("NewPreset1"));
-            Plugin.Log.Info("button pressed!!! wow!!!");
+            string nameOfSelected = PresetSaveLoader.writeToPreset(new ColorPreset.ColorPreset($"NewPreset{OtherUtils.findNewPresetCount()}"));
+            updateList(nameOfSelected);
+            list.dropdown.SelectCellWithIdx(list.values.IndexOf(nameOfSelected));
+
         }
 
-        // [UIAction("#apply")]
-        // public void OnApply() => Logger.log.Info($"list-choice value applied, now: {listChoice}");
+        internal void updateList(string nameOfSelected)
+        {
+            
+            PluginConfig.Instance.selected = nameOfSelected;
+            list.values = new List<object>(PresetSaveLoader.getListOfAllPresets());
+            list.UpdateChoices();
+        }
     }
-
 }
