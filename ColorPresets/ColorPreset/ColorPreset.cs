@@ -3,20 +3,27 @@ using UnityEngine;
 
 namespace ColorPresets.ColorPreset
 {
-    [Serializable]
+    
     public class ColorPreset
     {
 
-
+        
         public Color leftSaber { get; set; } = new Color(168, 32, 32);
+        
         public Color rightSaber { get; set; } = new Color(32, 100, 168);
+        
         public Color lightOne { get; set; } = new Color(32, 100, 168);
+        
         public Color lightTwo { get; set; } = new Color(48, 152, 255);
+        
         public Color wall { get; set; } = new Color(168, 32, 32);
+        
         public Color boostOne { get; set; } = new Color(192, 48, 48);
+        
         public Color boostTwo { get; set; } = new Color(48, 152, 255);
+        
 
-        private string _name { get; set; }
+        public string _name { get; set; }
 
         public ColorPreset(string name)
         {

@@ -12,8 +12,11 @@ namespace ColorPresets.ColorPreset
     [Serializable]
     public class Color
     {
+        [SerializeField]
         public int red { get; set; } = 255;
+        [SerializeField]
         public int green { get; set; } = 255;
+        [SerializeField]
         public int blue { get; set; } = 255;
 
         public Color(int red, int green, int blue)

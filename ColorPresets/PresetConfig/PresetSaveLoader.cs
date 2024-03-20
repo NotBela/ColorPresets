@@ -37,16 +37,27 @@ namespace ColorPresets.PresetConfig
 
         public static string writeToPreset(ColorPreset.ColorPreset preset)
         {
-            List<object> list = new List<object>() { preset };
+            List<ColorPreset.ColorPreset> list = new List<ColorPreset.ColorPreset>();
 
-            File.WriteAllText(pathToFolder + preset + ".json", JsonUtility.ToJson(list));
+            list.Add(new ColorPreset.ColorPreset("testName")
+            {
+                leftSaber = preset.leftSaber,
+                rightSaber = preset.rightSaber,
+                lightOne = preset.lightOne,
+                lightTwo = preset.lightTwo,
+                wall = preset.wall,
+                boostOne = preset.boostOne,
+                boostTwo = preset.boostTwo,
+            });
+
+            File.WriteAllText(pathToFolder + preset.ToString() + ".json", JsonUtility.ToJson(list));
 
             return preset.ToString();
         }
 
         public static ColorPreset.ColorPreset readPreset(string jsonName)
         {
-            ColorPreset.ColorPreset jsonDeserialized = JsonUtility.FromJson<ColorPreset.ColorPreset>(jsonName + ".json");
+            ColorPreset.ColorPreset jsonDeserialized = JsonUtility.FromJson<ColorPreset.ColorPreset>(pathToFolder + jsonName + ".json");
 
             return jsonDeserialized;
         }
