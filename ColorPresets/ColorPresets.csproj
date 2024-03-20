@@ -112,6 +112,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ColorPreset\Color.cs" />
     <Compile Include="ColorPreset\ColorPreset.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="PluginConfig.cs" />

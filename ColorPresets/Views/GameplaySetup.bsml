@@ -13,6 +13,7 @@
 		text="Left Saber" 
 		id="leftSaberColorSelector" 
 		value="leftSaberColorVal"
+		apply-on-change="true"
 	/>
 	
 	

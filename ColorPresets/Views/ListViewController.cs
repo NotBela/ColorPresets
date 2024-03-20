@@ -20,27 +20,46 @@ namespace ColorPresets.Views
         [UIValue("listChoice")]
         private object listChoice { 
             get { return PluginConfig.Instance.selectedPreset; } 
-            set { PluginConfig.Instance.selectedPreset = listOptions[list.dropdown.selectedIndex] as string; } 
+            set {
+                updateList();
+                PluginConfig.Instance.selectedPreset = listOptions[list.dropdown.selectedIndex] as string; 
+            } 
         }
 
         #endregion PresetSelector
 
         #region SaberColorValues
-        // [UIValue("leftSaberColorVal")]
-        // private Color leftSaberColorVal = 
+        [UIValue("leftSaberColorVal")]
+        private Color leftSaberColorVal
+        {
+            get { return PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).leftSaber.convertToUnityColor(); }
+            set {
+                
+                ColorPreset.ColorPreset tempPreset = PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset);
+                tempPreset.leftSaber = ColorPreset.Color.convertFromUnityColor(leftSaberColorVal.r, leftSaberColorVal.g, leftSaberColorVal.b);
+                PresetSaveLoader.writeToPreset(tempPreset, PluginConfig.Instance.selectedPreset); 
+            }
+        }
+
+        #endregion SaberColorValues
 
         #region NewPresetButton
         [UIAction("newPresetButtonClicked")]
         private void newPresetButton()
         {
-            string nameOfSelected = PresetSaveLoader.writeToPreset(new ColorPreset.ColorPreset($"NewPreset{OtherUtils.findNewPresetCount()}"));
-            updateList(nameOfSelected);
+            //create preset
+            string nameOfSelected = $"NewPreset{OtherUtils.findNewPresetCount()}";
+            PresetSaveLoader.writeToPreset(new ColorPreset.ColorPreset(nameOfSelected));
+
+            // update values 
+            updateList();
+
             list.dropdown.SelectCellWithIdx(list.values.IndexOf(nameOfSelected));
 
         }
         #endregion NewPresetButton
 
-        internal void updateList(string nameOfSelected)
+        internal void updateList()
         {
             list.values = new List<object>(PresetSaveLoader.getListOfAllPresets());
             list.UpdateChoices();

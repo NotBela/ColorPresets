@@ -1,35 +1,55 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace ColorPresets.ColorPreset
 {
     
     public class ColorPreset
     {
+        private static readonly Color defaultLeftSaber = new Color(.6588f, .1254f, .1254f);
 
+        private static readonly Color defaultRightSaber = new Color(.6588f, .1254f, .1254f);
         
-        public Color leftSaber { get; set; } = new Color(168, 32, 32);
+        private static readonly Color defaultLightOne = new Color(.6588f, .1254f, .1254f);
+
+        private static readonly Color defaultLightTwo = new Color(.6588f, .1254f, .1254f);
+
+        private static readonly Color defaultWall = new Color(.6588f, .1254f, .1254f);
         
-        public Color rightSaber { get; set; } = new Color(32, 100, 168);
+        private static readonly Color defaultBoostOne = new Color(.6588f, .1254f, .1254f);
         
-        public Color lightOne { get; set; } = new Color(32, 100, 168);
+        private static readonly Color defaultBoostTwo = new Color(.6588f, .1254f, .1254f);
+
+        public Color leftSaber { get; set; }
         
-        public Color lightTwo { get; set; } = new Color(48, 152, 255);
+        public Color rightSaber { get; set; }
         
-        public Color wall { get; set; } = new Color(168, 32, 32);
+        public Color lightOne { get; set; }
         
-        public Color boostOne { get; set; } = new Color(192, 48, 48);
+        public Color lightTwo { get; set; }
         
-        public Color boostTwo { get; set; } = new Color(48, 152, 255);
+        public Color wall { get; set; }
         
+        public Color boostOne { get; set; }
+        
+        public Color boostTwo { get; set; }
 
         public string _name { get; set; }
 
         public ColorPreset(string name)
         {
             _name = name;
+            leftSaber = defaultLeftSaber;
+            rightSaber = defaultRightSaber;
+            lightOne = defaultLightOne;
+            lightTwo = defaultLightTwo;
+            wall = defaultWall;
+            boostOne = defaultBoostOne;
+            boostTwo = defaultBoostTwo;
         }
 
+        [JsonConstructor]
         public ColorPreset(string name, Color leftSaber, Color rightSaber, Color lightOne, Color lightTwo, Color wall, Color boostOne, Color boostTwo)
         {
             _name = name;
@@ -51,4 +71,5 @@ namespace ColorPresets.ColorPreset
             return JsonUtility.ToJson(preset);
         }
     }
+
 }

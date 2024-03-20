@@ -35,24 +35,13 @@ namespace ColorPresets.PresetConfig
             return list;
         }
 
-        public static string writeToPreset(ColorPreset.ColorPreset preset)
+        public static void writeToPreset(ColorPreset.ColorPreset presetToReadFrom, string presetToWriteTo)
         {
-            List<ColorPreset.ColorPreset> list = new List<ColorPreset.ColorPreset>();
+            File.WriteAllText($"{pathToFolder}{presetToWriteTo.ToString()}.json", JsonConvert.SerializeObject(presetToReadFrom));
+        }
 
-            list.Add(new ColorPreset.ColorPreset("testName")
-            {
-                leftSaber = preset.leftSaber,
-                rightSaber = preset.rightSaber,
-                lightOne = preset.lightOne,
-                lightTwo = preset.lightTwo,
-                wall = preset.wall,
-                boostOne = preset.boostOne,
-                boostTwo = preset.boostTwo,
-            });
-
-            File.WriteAllText(pathToFolder + preset.ToString() + ".json", JsonConvert.SerializeObject(list));
-
-            return preset.ToString();
+        public static void writeToPreset(ColorPreset.ColorPreset preset) {
+            File.WriteAllText(pathToFolder + preset.ToString() + ".json", JsonConvert.SerializeObject(preset, Formatting.Indented)); // new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
         }
 
         public static ColorPreset.ColorPreset readPreset(string presetName)
