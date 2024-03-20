@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using IPA.Utilities;
 using System.IO;
-using UnityEngine;
+using Newtonsoft.Json;
 
 namespace ColorPresets.PresetConfig
 {
@@ -50,14 +50,14 @@ namespace ColorPresets.PresetConfig
                 boostTwo = preset.boostTwo,
             });
 
-            File.WriteAllText(pathToFolder + preset.ToString() + ".json", JsonUtility.ToJson(list));
+            File.WriteAllText(pathToFolder + preset.ToString() + ".json", JsonConvert.SerializeObject(list));
 
             return preset.ToString();
         }
 
         public static ColorPreset.ColorPreset readPreset(string presetName)
         {
-            ColorPreset.ColorPreset jsonDeserialized = JsonUtility.FromJson<ColorPreset.ColorPreset>(File.ReadAllText($"{pathToFolder}{presetName}.json"));
+            ColorPreset.ColorPreset jsonDeserialized = JsonConvert.DeserializeObject<ColorPreset.ColorPreset>(File.ReadAllText($"{pathToFolder}{presetName}.json"));
 
             return jsonDeserialized;
         }
