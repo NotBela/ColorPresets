@@ -5,6 +5,7 @@
 		value="listChoice"
 		options="listOptions"
 		apply-on-change="true"
+		set-event="setEvent"
 	/>
 	<button text="New Preset" on-click="newPresetButtonClicked"/>
 </scrollable-settings-container>

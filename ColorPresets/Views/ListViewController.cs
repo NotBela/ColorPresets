@@ -28,9 +28,7 @@ namespace ColorPresets.Views
         public List<object> listOptions = new List<object>(PresetSaveLoader.getListOfAllPresets());
 
         [UIValue("listChoice")]
-        private object listChoice = PluginConfig.Instance.selected;
-
-        
+        private object listChoice { get { return PluginConfig.Instance.selectedPreset; } set { PluginConfig.Instance.selectedPreset = listOptions[list.dropdown.selectedIndex] as string; } }
 
         [UIAction("newPresetButtonClicked")]
         private void newPresetButton()
@@ -43,8 +41,6 @@ namespace ColorPresets.Views
 
         internal void updateList(string nameOfSelected)
         {
-            
-            PluginConfig.Instance.selected = nameOfSelected;
             list.values = new List<object>(PresetSaveLoader.getListOfAllPresets());
             list.UpdateChoices();
         }
