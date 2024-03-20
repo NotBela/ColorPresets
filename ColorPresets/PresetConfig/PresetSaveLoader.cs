@@ -45,9 +45,9 @@ namespace ColorPresets.PresetConfig
             File.WriteAllText(Path.Combine(pathToFolder, preset.ToString()), json + ".json");
         }
 
-        public static ColorPreset.ColorPreset readPreset(string presetName)
+        public static ColorPreset.ColorPreset readPreset(string jsonName)
         {
-            ColorPreset.ColorPreset jsonDeserialized = JsonConvert.DeserializeObject<ColorPreset.ColorPreset>(File.ReadAllText($"{pathToFolder}{presetName}.json"));
+            ColorPreset.ColorPreset jsonDeserialized = JsonConvert.DeserializeObject<ColorPreset.ColorPreset>(jsonName);
 
             return jsonDeserialized;
         }
