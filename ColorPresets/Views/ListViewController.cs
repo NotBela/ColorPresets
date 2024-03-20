@@ -1,26 +1,16 @@
-﻿using BeatSaberMarkupLanguage;
-using BeatSaberMarkupLanguage.Attributes;
-using BeatSaberMarkupLanguage.Components;
+﻿using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.Components.Settings;
-using BeatSaberMarkupLanguage.Macros;
-using BeatSaberMarkupLanguage.ViewControllers;
-using ColorPresets.ColorPreset;
 using ColorPresets.Configuration;
 using ColorPresets.PresetConfig;
-using IPA;
-using IPA.Logging;
-using JetBrains.Annotations;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.Collections;
-
+using UnityEngine;
 
 namespace ColorPresets.Views
 {
     [ViewDefinition("ColorPresets.Views.GameplaySetup.bsml")]
     public class ListViewController
     {
+        #region PresetSelector
         [UIComponent("colorPresetsDropDown")]
         private DropDownListSetting list = new DropDownListSetting();
 
@@ -28,8 +18,18 @@ namespace ColorPresets.Views
         public List<object> listOptions = new List<object>(PresetSaveLoader.getListOfAllPresets());
 
         [UIValue("listChoice")]
-        private object listChoice { get { return PluginConfig.Instance.selectedPreset; } set { PluginConfig.Instance.selectedPreset = listOptions[list.dropdown.selectedIndex] as string; } }
+        private object listChoice { 
+            get { return PluginConfig.Instance.selectedPreset; } 
+            set { PluginConfig.Instance.selectedPreset = listOptions[list.dropdown.selectedIndex] as string; } 
+        }
 
+        #endregion PresetSelector
+
+        #region SaberColorValues
+        // [UIValue("leftSaberColorVal")]
+        // private Color leftSaberColorVal = 
+
+        #region NewPresetButton
         [UIAction("newPresetButtonClicked")]
         private void newPresetButton()
         {
@@ -38,6 +38,7 @@ namespace ColorPresets.Views
             list.dropdown.SelectCellWithIdx(list.values.IndexOf(nameOfSelected));
 
         }
+        #endregion NewPresetButton
 
         internal void updateList(string nameOfSelected)
         {

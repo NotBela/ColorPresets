@@ -1,4 +1,5 @@
 ﻿<scrollable-settings-container>
+	
 	<dropdown-list-setting 
 		id="colorPresetsDropDown"
 		text="Colors"
@@ -7,5 +8,17 @@
 		apply-on-change="true"
 		set-event="setEvent"
 	/>
-	<button text="New Preset" on-click="newPresetButtonClicked"/>
+	
+	<color-setting 
+		text="Left Saber" 
+		id="leftSaberColorSelector" 
+		value="leftSaberColorVal"
+	/>
+	
+	
+	<button 
+		text="New Preset" 
+		on-click="newPresetButtonClicked"
+	/>
+	
 </scrollable-settings-container>
