@@ -18,12 +18,12 @@ namespace ColorPresets.Views
         public List<object> listOptions = new List<object>(PresetSaveLoader.getListOfAllPresets());
 
         [UIValue("listChoice")]
-        private object listChoice { 
-            get { return PluginConfig.Instance.selectedPreset; } 
+        private object listChoice {
+            get { return PluginConfig.Instance.selectedPreset; }
             set {
                 updateList();
-                PluginConfig.Instance.selectedPreset = listOptions[list.dropdown.selectedIndex] as string; 
-            } 
+                PluginConfig.Instance.selectedPreset = listOptions[list.dropdown.selectedIndex] as string;
+            }
         }
 
         #endregion PresetSelector
@@ -34,10 +34,7 @@ namespace ColorPresets.Views
         {
             get { return PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).leftSaber.convertToUnityColor(); }
             set {
-                
-                ColorPreset.ColorPreset tempPreset = PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset);
-                tempPreset.leftSaber = ColorPreset.Color.convertFromUnityColor(leftSaberColorVal.r, leftSaberColorVal.g, leftSaberColorVal.b);
-                PresetSaveLoader.writeToPreset(tempPreset, PluginConfig.Instance.selectedPreset); 
+                setObjectColor("leftSaber");
             }
         }
 
@@ -64,5 +61,20 @@ namespace ColorPresets.Views
             list.values = new List<object>(PresetSaveLoader.getListOfAllPresets());
             list.UpdateChoices();
         }
+
+        internal void setObjectColor(string fieldToSet)
+        {
+            ColorPreset.ColorPreset tempPreset = PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset);
+
+            switch (fieldToSet)
+            {
+                // create rest of the color buttons and then fix this
+                // also the leftSaberColorVal getter isnt doing anything, find another way to set it
+                case "leftSaber": tempPreset.leftSaber = ColorPreset.Color.convertFromUnityColor(leftSaberColorVal.r, leftSaberColorVal.g, leftSaberColorVal.b); break;
+                case "rightSaber": tempPreset.rightSaber = ColorPreset.Color.convertFromUnityColor(leftSaberColorVal.r, leftSaberColorVal.g, leftSaberColorVal.b); break;
+            }
+            
+            PresetSaveLoader.writeToPreset(tempPreset, PluginConfig.Instance.selectedPreset);
+        }    
     }
 }
