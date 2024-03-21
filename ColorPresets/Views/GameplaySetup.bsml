@@ -1,25 +1,30 @@
-﻿<scrollable-settings-container>
+﻿<bg xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd'
+	>
+	<scrollable-settings-container>
 	
-	<dropdown-list-setting 
-		id="colorPresetsDropDown"
-		text="Colors"
-		value="listChoice"
-		options="listOptions"
-		apply-on-change="true"
-		set-event="setEvent"
-	/>
+		<dropdown-list-setting 
+			id="colorPresetsDropDown"
+			text="Colors"
+			value="listChoice"
+			options="listOptions"
+			apply-on-change="true"
+			set-event="setEvent"
+		/>
 	
-	<color-setting 
-		text="Left Saber" 
-		id="leftSaberColorSelector" 
-		value="leftSaberColorVal"
-		apply-on-change="true"
-	/>
+		<color-setting 
+			text="Left Saber" 
+			id="leftSaberColorSelector" 
+			value="leftSaberColorVal"
+			apply-on-change="true"
+		/>
+		
 	
 	
-	<button 
-		text="New Preset" 
-		on-click="newPresetButtonClicked"
-	/>
+		<button 
+			text="New Preset" 
+			on-click="newPresetButtonClicked"
+		/>
 	
-</scrollable-settings-container>
+	</scrollable-settings-container>
+</bg>

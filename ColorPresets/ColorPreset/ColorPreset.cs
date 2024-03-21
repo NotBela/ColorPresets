@@ -65,11 +65,6 @@ namespace ColorPresets.ColorPreset
         {
             return _name;
         }
-
-        public static string toJson(ColorPreset preset)
-        {
-            return JsonUtility.ToJson(preset);
-        }
     }
 
 }

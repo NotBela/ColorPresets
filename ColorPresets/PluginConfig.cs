@@ -43,8 +43,8 @@ namespace ColorPresets.Configuration
             }
             else
             {
-                ListViewController listViewController = new ListViewController();
-                GameplaySetup.instance.AddTab("ColorPresets", "ColorPresets.Views.GameplaySetup.bsml", listViewController, MenuType.All);
+                SetupTabController setupTab = new SetupTabController();
+                GameplaySetup.instance.AddTab("ColorPresets", "ColorPresets.Views.GameplaySetup.bsml", setupTab, MenuType.All);
             }
         }
 

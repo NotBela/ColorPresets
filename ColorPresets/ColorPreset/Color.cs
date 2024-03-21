@@ -19,12 +19,16 @@
 
         public UnityEngine.Color convertToUnityColor()
         {
-            return new UnityEngine.Color(r, g, b);
+            return new UnityEngine.Color(r, g, b, 1f);
         }
 
         public static Color convertFromUnityColor(float r, float g, float b)
         {
             return new Color(r, g, b);
+        }
+        public static Color convertFromUnityColor(UnityEngine.Color color)
+        {
+            return new Color(color.r, color.g, color.b);
         }
     }
 }

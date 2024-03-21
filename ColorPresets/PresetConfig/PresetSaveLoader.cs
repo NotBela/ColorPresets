@@ -2,10 +2,11 @@
 using IPA.Utilities;
 using System.IO;
 using Newtonsoft.Json;
+using System;
 
 namespace ColorPresets.PresetConfig
 {
-    public static class PresetSaveLoader
+    public class PresetSaveLoader
     {
         private static readonly string pathToFolder = UnityGame.InstallPath + "\\UserData\\ColorPresets\\";
 
@@ -37,11 +38,11 @@ namespace ColorPresets.PresetConfig
 
         public static void writeToPreset(ColorPreset.ColorPreset presetToReadFrom, string presetToWriteTo)
         {
-            File.WriteAllText($"{pathToFolder}{presetToWriteTo.ToString()}.json", JsonConvert.SerializeObject(presetToReadFrom));
+            File.WriteAllText($"{pathToFolder}{presetToWriteTo}.json", JsonConvert.SerializeObject(presetToReadFrom));
         }
 
         public static void writeToPreset(ColorPreset.ColorPreset preset) {
-            File.WriteAllText(pathToFolder + preset.ToString() + ".json", JsonConvert.SerializeObject(preset, Formatting.Indented)); // new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
+            File.WriteAllText(pathToFolder + preset + ".json", JsonConvert.SerializeObject(preset, Formatting.Indented)); // new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
         }
 
         public static ColorPreset.ColorPreset readPreset(string presetName)
@@ -49,6 +50,24 @@ namespace ColorPresets.PresetConfig
             ColorPreset.ColorPreset jsonDeserialized = JsonConvert.DeserializeObject<ColorPreset.ColorPreset>(File.ReadAllText($"{pathToFolder}{presetName}.json"));
 
             return jsonDeserialized;
+        }
+        public static void writeColorToPreset(string fieldToSet, string presetName, ColorPreset.Color color)
+        {
+            ColorPreset.ColorPreset tempPreset = readPreset(presetName);
+
+            switch(fieldToSet)
+            {
+                case "leftSaber": tempPreset.leftSaber = color; break;
+                case "rightSaber": tempPreset.leftSaber = color; break;
+                case "lightOne": tempPreset.lightOne = color; break;
+                case "lightTwo": tempPreset.lightTwo = color; break;
+                case "wall": tempPreset.wall = color; break;
+                case "boostOne": tempPreset.boostOne = color; break;
+                case "boostTwo": tempPreset.boostTwo = color; break;
+                default: throw new Exception("invalidPresetFieldType");
+            }
+            writeToPreset(tempPreset, presetName);
+            // File.WriteAllText(JsonConvert.SerializeObject(tempPreset, Formatting.Indented), pathToPreset);
         }
     }
 }

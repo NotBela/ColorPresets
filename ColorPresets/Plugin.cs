@@ -63,9 +63,9 @@ namespace ColorPresets
             harmony.PatchAll(Assembly.GetExecutingAssembly());
 
             BSMLSettings.instance.AddSettingsMenu("ColorPresets", "ColorPresets.Views.Settings.bsml", PluginConfig.Instance);
-            ListViewController listViewController = new ListViewController();
+            SetupTabController setupTab = new SetupTabController();
 
-            if (PluginConfig.Instance.isEnabled) GameplaySetup.instance.AddTab("ColorPresets", "ColorPresets.Views.GameplaySetup.bsml", listViewController, MenuType.All);
+            if (PluginConfig.Instance.isEnabled) GameplaySetup.instance.AddTab("ColorPresets", "ColorPresets.Views.GameplaySetup.bsml", setupTab, MenuType.All);
 
             Log.Info("ColorPresets loaded successfully");
         }
@@ -75,8 +75,8 @@ namespace ColorPresets
         {
             // Log.Debug("OnApplicationQuit");
             harmony.UnpatchSelf();
-            // BSMLSettings.instance.RemoveSettingsMenu(PluginConfig.Instance);
-            // GameplaySetup.instance.RemoveTab("ColorPresets");
+            BSMLSettings.instance.RemoveSettingsMenu(PluginConfig.Instance);
+            GameplaySetup.instance.RemoveTab("ColorPresets");
         }
     }
 }
