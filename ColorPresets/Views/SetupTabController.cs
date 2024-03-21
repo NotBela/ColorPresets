@@ -2,6 +2,7 @@
 using BeatSaberMarkupLanguage.Components.Settings;
 using ColorPresets.Configuration;
 using ColorPresets.PresetConfig;
+using System;
 using System.Collections.Generic;
 
 namespace ColorPresets.Views
@@ -18,7 +19,22 @@ namespace ColorPresets.Views
 
         [UIValue("listChoice")]
         private object listChoice {
-            get { return PluginConfig.Instance.selectedPreset; }
+            get { 
+                try
+                {
+
+                    return PluginConfig.Instance.selectedPreset;
+
+                }
+                catch (Exception e)
+                {
+                    // this should work maybe
+                    Plugin.Log.Info("An error occured attempting to find the selected preset (did you delete it?)");
+                    Plugin.Log.Info("Attempting to select another preset...");
+                    return listOptions[0];
+                }
+                
+                }
             set {
                 updateList();
                 PluginConfig.Instance.selectedPreset = listOptions[list.dropdown.selectedIndex] as string;
