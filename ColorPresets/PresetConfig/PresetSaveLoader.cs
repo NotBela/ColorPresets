@@ -53,7 +53,13 @@ namespace ColorPresets.PresetConfig
         }
         public static void writeColorToPreset(string fieldToSet, string presetName, ColorPreset.Color color)
         {
+            //debug
+            Plugin.Log.Info($"inputColor: {color.r} {color.g} {color.b}");
+            
+            
             ColorPreset.ColorPreset tempPreset = readPreset(presetName);
+            //debug
+            Plugin.Log.Info($"parseColor: {tempPreset.leftSaber.r} {tempPreset.leftSaber.g} {tempPreset.leftSaber.b}");
 
             switch(fieldToSet)
             {
@@ -66,6 +72,10 @@ namespace ColorPresets.PresetConfig
                 case "boostTwo": tempPreset.boostTwo = color; break;
                 default: throw new Exception("invalidPresetFieldType");
             }
+
+            //debug
+            Plugin.Log.Info($"afterSet: {tempPreset.leftSaber.r} {tempPreset.leftSaber.g} {tempPreset.leftSaber.g}");
+
             writeToPreset(tempPreset, presetName);
             // File.WriteAllText(JsonConvert.SerializeObject(tempPreset, Formatting.Indented), pathToPreset);
         }
