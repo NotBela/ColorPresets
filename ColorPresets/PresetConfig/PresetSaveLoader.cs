@@ -8,7 +8,7 @@ namespace ColorPresets.PresetConfig
 {
     public class PresetSaveLoader
     {
-        private static readonly string pathToFolder = UnityGame.InstallPath + "\\UserData\\ColorPresets\\";
+        public static readonly string pathToFolder = UnityGame.InstallPath + "\\UserData\\ColorPresets\\";
 
         public static void makeFolder()
         {

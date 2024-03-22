@@ -21,19 +21,7 @@ namespace ColorPresets.Views
         [UIValue("listChoice")]
         private object listChoice {
             get { 
-                try
-                {
-
-                    return PluginConfig.Instance.selectedPreset;
-
-                }
-                catch (Exception e)
-                {
-                    // this should work maybe
-                    Plugin.Log.Info("An error occured attempting to find the selected preset (did you delete it?)");
-                    Plugin.Log.Info("Attempting to select another preset...");
-                    return listOptions[0];
-                }
+                 return PluginConfig.Instance.selectedPreset;     
                 
                 }
             set {
@@ -117,6 +105,8 @@ namespace ColorPresets.Views
             updateList();
 
             list.dropdown.SelectCellWithIdx(list.values.IndexOf(nameOfSelected));
+
+            updateList();
 
         }
         #endregion NewPresetButton
