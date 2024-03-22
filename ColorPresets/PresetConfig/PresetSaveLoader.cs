@@ -38,7 +38,7 @@ namespace ColorPresets.PresetConfig
 
         public static void writeToPreset(ColorPreset.ColorPreset presetToReadFrom, string presetToWriteTo)
         {
-            File.WriteAllText($"{pathToFolder}{presetToWriteTo}.json", JsonConvert.SerializeObject(presetToReadFrom));
+            File.WriteAllText($"{pathToFolder}{presetToWriteTo}.json", JsonConvert.SerializeObject(presetToReadFrom, Formatting.Indented));
         }
 
         public static void writeToPreset(ColorPreset.ColorPreset preset) {
@@ -55,12 +55,12 @@ namespace ColorPresets.PresetConfig
         {
             //debug
             // the input color here is what it was when it was opened and not the new color
-            Plugin.Log.Info($"inputColor: {color.r} {color.g} {color.b}");
+            // Plugin.Log.Info($"inputColor: {color.r} {color.g} {color.b}");
             
             
             ColorPreset.ColorPreset tempPreset = readPreset(presetName);
             //debug
-            Plugin.Log.Info($"parseColor: {tempPreset.leftSaber.r} {tempPreset.leftSaber.g} {tempPreset.leftSaber.b}");
+            // Plugin.Log.Info($"parseColor: {tempPreset.leftSaber.r} {tempPreset.leftSaber.g} {tempPreset.leftSaber.b}");
 
             switch(fieldToSet)
             {
@@ -75,7 +75,7 @@ namespace ColorPresets.PresetConfig
             }
 
             //debug
-            Plugin.Log.Info($"afterSet: {tempPreset.leftSaber.r} {tempPreset.leftSaber.g} {tempPreset.leftSaber.g}");
+            // Plugin.Log.Info($"afterSet: {tempPreset.leftSaber.r} {tempPreset.leftSaber.g} {tempPreset.leftSaber.g}");
 
             writeToPreset(tempPreset, presetName);
             // File.WriteAllText(JsonConvert.SerializeObject(tempPreset, Formatting.Indented), pathToPreset);
