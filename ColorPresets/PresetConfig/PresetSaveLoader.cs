@@ -54,6 +54,7 @@ namespace ColorPresets.PresetConfig
         public static void writeColorToPreset(string fieldToSet, string presetName, ColorPreset.Color color)
         {
             //debug
+            // the input color here is what it was when it was opened and not the new color
             Plugin.Log.Info($"inputColor: {color.r} {color.g} {color.b}");
             
             

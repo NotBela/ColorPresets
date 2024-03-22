@@ -1,4 +1,5 @@
 ﻿using BeatSaberMarkupLanguage.Attributes;
+using BeatSaberMarkupLanguage.Components;
 using BeatSaberMarkupLanguage.Components.Settings;
 using ColorPresets.Configuration;
 using ColorPresets.PresetConfig;
@@ -44,16 +45,22 @@ namespace ColorPresets.Views
         #endregion PresetSelector
 
         #region SaberColorValues
-        
+        [UIComponent("leftSaberColorSelector")]
+        public ColorSetting leftSaberColorSelector;
+
+
         [UIValue("leftSaberColorVal")]
         private UnityEngine.Color leftSaberColorVal
         {
-            get { return PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).leftSaber.convertToUnityColor(); }
+            get { return leftSaberColorSelector.CurrentColor; } // PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).leftSaber.convertToUnityColor(); }
 
             // set not needed
             // set WAS needed actually idk what i was talking about
-            set { PresetSaveLoader.writeColorToPreset("leftSaber", PluginConfig.Instance.selectedPreset, ColorPreset.Color.convertFromUnityColor(leftSaberColorVal)); }
+            set { PresetSaveLoader.writeColorToPreset("leftSaber", PluginConfig.Instance.selectedPreset, ColorPreset.Color.convertFromUnityColor(leftSaberColorSelector.CurrentColor)); }
         }
+
+
+        
 
         #endregion SaberColorValues
 
