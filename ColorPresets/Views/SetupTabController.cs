@@ -47,7 +47,7 @@ namespace ColorPresets.Views
 
         #region SaberColorValues
         [UIComponent("leftSaberColorSelector")]
-        public ColorSetting leftSaberColorSelector;
+        private ColorSetting leftSaberColorSelector;
 
 
         [UIValue("leftSaberColorVal")]
@@ -60,8 +60,48 @@ namespace ColorPresets.Views
             set { PresetSaveLoader.writeColorToPreset("leftSaber", PluginConfig.Instance.selectedPreset, ColorPreset.Color.convertFromUnityColor(leftSaberColorSelector.CurrentColor)); }
         }
 
+        [UIComponent("rightSaberColorSelector")]
+        private ColorSetting rightSaberColorSelector;
 
-        
+        [UIValue("rightSaberColorVal")]
+        private UnityEngine.Color rightSaberColorVal
+        {
+            get { return PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).rightSaber.convertToUnityColor(); }
+            set { PresetSaveLoader.writeColorToPreset("rightSaber", PluginConfig.Instance.selectedPreset, ColorPreset.Color.convertFromUnityColor(rightSaberColorSelector.CurrentColor)); }
+        }
+
+        [UIComponent("lightOneColorSelector")]
+        private ColorSetting lightOneColorSelector;
+
+        [UIValue("lightOneColorVal")]
+        private UnityEngine.Color lightOneColorVal
+        {
+            get { return PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).lightOne.convertToUnityColor(); }
+            set { PresetSaveLoader.writeColorToPreset("lightOne", PluginConfig.Instance.selectedPreset, ColorPreset.Color.convertFromUnityColor(lightOneColorSelector.CurrentColor)); }
+        }
+
+        [UIComponent("lightTwoColorSelector")]
+        private ColorSetting lightTwoColorSelector;
+
+        [UIValue("lightTwoColorVal")]
+        private UnityEngine.Color lightTwoColorVal
+        {
+            get { return PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).lightTwo.convertToUnityColor(); }
+            set { PresetSaveLoader.writeColorToPreset("lightTwo", PluginConfig.Instance.selectedPreset, ColorPreset.Color.convertFromUnityColor(lightTwoColorSelector.CurrentColor)); }
+        }
+
+        [UIComponent("wallColorSelector")]
+        private ColorSetting wallColorSelector;
+
+        [UIValue("wallColorVal")]
+        private UnityEngine.Color wallColorVal
+        {
+            get { return PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).wall.convertToUnityColor(); }
+            set { PresetSaveLoader.writeColorToPreset("wall", PluginConfig.Instance.selectedPreset, ColorPreset.Color.convertFromUnityColor(wallColorSelector.CurrentColor)); }
+        }
+
+
+
 
         #endregion SaberColorValues
 
@@ -91,6 +131,10 @@ namespace ColorPresets.Views
         {
             //ADD ALL COLORS HERE WHEN IMPLEMENTED
             leftSaberColorSelector.CurrentColor = PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).leftSaber.convertToUnityColor();
+            rightSaberColorSelector.CurrentColor = PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).rightSaber.convertToUnityColor();
+            lightOneColorSelector.CurrentColor = PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).lightOne.convertToUnityColor();
+            lightTwoColorSelector.CurrentColor = PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).lightTwo.convertToUnityColor();
+            wallColorSelector.CurrentColor = PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).wall.convertToUnityColor();
         }
     }
 }

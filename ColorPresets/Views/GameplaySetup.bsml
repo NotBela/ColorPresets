@@ -18,6 +18,34 @@
 			value="leftSaberColorVal"
 			apply-on-change="true"
 		/>
+
+		<color-setting
+			text="Right Saber"
+			id="rightSaberColorSelector"
+			value="rightSaberColorVal"
+			apply-on-change="true"
+		/>
+
+		<color-setting
+			text="Light One"
+			id="lightOneColorSelector"
+			value="lightOneColorVal"
+			apply-on-change="true"
+		/>
+
+		<color-setting
+			text="Light Two"
+			id="lightTwoColorSelector"
+			value="lightTwoColorVal"
+			apply-on-change="true"
+		/>
+
+		<color-setting
+			text="Wall"
+			id="wallColorSelector"
+			value="wallColorVal"
+			apply-on-change="true"
+		/>
 		
 	
 	
