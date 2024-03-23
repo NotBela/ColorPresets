@@ -26,7 +26,7 @@ namespace ColorPresets.Views
                 }
             set {
                 updateList();
-                PluginConfig.Instance.selectedPreset = listOptions[list.dropdown.selectedIndex] as string;
+                PluginConfig.Instance.selectedPreset = list.Value as string;
                 updateColors();
             }
         }
