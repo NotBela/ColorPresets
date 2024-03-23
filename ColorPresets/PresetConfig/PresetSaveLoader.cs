@@ -65,7 +65,7 @@ namespace ColorPresets.PresetConfig
             switch(fieldToSet)
             {
                 case "leftSaber": tempPreset.leftSaber = color; break;
-                case "rightSaber": tempPreset.leftSaber = color; break;
+                case "rightSaber": tempPreset.rightSaber = color; break;
                 case "lightOne": tempPreset.lightOne = color; break;
                 case "lightTwo": tempPreset.lightTwo = color; break;
                 case "wall": tempPreset.wall = color; break;

@@ -9,11 +9,11 @@ namespace ColorPresets.ColorPreset
     {
         private static readonly Color defaultLeftSaber = new Color(.6588f, .1254f, .1254f);
 
-        private static readonly Color defaultRightSaber = new Color(.6588f, .1254f, .1254f);
+        private static readonly Color defaultRightSaber = new Color(.1254f, .3921f, .6588f);
         
         private static readonly Color defaultLightOne = new Color(.6588f, .1254f, .1254f);
 
-        private static readonly Color defaultLightTwo = new Color(.6588f, .1254f, .1254f);
+        private static readonly Color defaultLightTwo = new Color(.1882f, .5960f, 1.0f);
 
         private static readonly Color defaultWall = new Color(.6588f, .1254f, .1254f);
         

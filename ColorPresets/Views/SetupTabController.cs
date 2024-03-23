@@ -41,7 +41,7 @@ namespace ColorPresets.Views
         [UIValue("leftSaberColorVal")]
         private UnityEngine.Color leftSaberColorVal
         {
-            get { return PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).leftSaber.convertToUnityColor(); } //  }
+            get { return PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).leftSaber.convertToUnityColor(); }
 
             // set not needed
             // set WAS needed actually idk what i was talking about
