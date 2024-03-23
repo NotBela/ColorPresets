@@ -100,13 +100,13 @@ namespace ColorPresets.Views
             //create preset
             string nameOfSelected = $"NewPreset{OtherUtils.findNewPresetCount()}";
             PresetSaveLoader.writeToPreset(new ColorPreset.ColorPreset(nameOfSelected));
-
+            PluginConfig.Instance.selectedPreset = nameOfSelected;
             // update values 
             updateList();
 
             list.dropdown.SelectCellWithIdx(list.values.IndexOf(nameOfSelected));
 
-            updateList();
+            updateColors();
 
         }
         #endregion NewPresetButton
