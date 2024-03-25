@@ -59,8 +59,13 @@
 			value="wallColorVal"
 			apply-on-change="true"
 		/>
-		
-	
+
+		<string-setting
+			text="Preset Name"
+			id="presetNameSetting"
+			value="presetNameVal"
+			apply-on-change="true"
+		/>
 	
 		<button 
 			text="New Preset" 

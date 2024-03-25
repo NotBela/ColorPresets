@@ -1,10 +1,10 @@
 ﻿using BeatSaberMarkupLanguage.Attributes;
-using BeatSaberMarkupLanguage.Components;
 using BeatSaberMarkupLanguage.Components.Settings;
 using ColorPresets.Configuration;
 using ColorPresets.PresetConfig;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace ColorPresets.Views
 {
@@ -119,6 +119,33 @@ namespace ColorPresets.Views
 
 
         #endregion SaberColorValues
+
+        #region nameEditingField
+
+        [UIValue("presetNameSetting")]
+        private string presetNameSetting
+        {
+            get { return PluginConfig.Instance.selectedPreset; }
+            set
+            {
+                if (!File.Exists($"{PresetSaveLoader.pathToFolder}{value}.json"))
+                {
+                    try
+                    {
+                        File.Move($"{PresetSaveLoader.pathToFolder}{PluginConfig.Instance.selectedPreset}.json", $"{PresetSaveLoader.pathToFolder}{value}.json");
+                        PluginConfig.Instance.selectedPreset = value;
+                        updateList();
+                        list.dropdown.SelectCellWithIdx(listOptions.IndexOf(value));
+                    }
+                    catch (Exception e)
+                    {
+                        Plugin.Log.Error($"An error occured renaming this preset: {e}");
+                    }
+                }
+            }
+        }
+
+        #endregion nameEditingField
 
         #region NewPresetButton
         [UIAction("newPresetButtonClicked")]
