@@ -53,6 +53,13 @@
 			text="New Preset" 
 			on-click="newPresetButtonClicked"
 		/>
+
+		<checkbox-setting
+			text="Enable Preset Editing"
+			value="enablePresetEditing"
+			apply-on-change="true"
+			id="enablePresetEditingSwitch"
+		/>
 	
 	</scrollable-settings-container>
 </bg>

@@ -17,6 +17,8 @@ namespace ColorPresets.Configuration
 
         public static PluginConfig Instance { get; set; }
 
+        public virtual bool enablePresetEditing { get; set; } = true;
+
         public virtual bool isEnabled { get; set; } = true;
 
         [NonNullable]

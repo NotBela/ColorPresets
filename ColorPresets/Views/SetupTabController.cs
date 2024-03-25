@@ -111,6 +111,20 @@ namespace ColorPresets.Views
         }
         #endregion NewPresetButton
 
+        #region enablePresetEditingSwitch
+
+        [UIValue("enablePresetEditingSwitch")]
+        private bool enablePresetEditingSwitch
+        {
+            get { return PluginConfig.Instance.enablePresetEditing; }
+            set { 
+                PluginConfig.Instance.enablePresetEditing = value;
+                enableOrDisableEditing(value);
+            }
+        }
+
+        #endregion enablePresetEditingSwitch
+
         internal void updateList()
         {
             list.values = new List<object>(PresetSaveLoader.getListOfAllPresets());
@@ -119,12 +133,21 @@ namespace ColorPresets.Views
 
         internal void updateColors()
         {
-            //ADD ALL COLORS HERE WHEN IMPLEMENTED
             leftSaberColorSelector.CurrentColor = PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).leftSaber.convertToUnityColor();
             rightSaberColorSelector.CurrentColor = PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).rightSaber.convertToUnityColor();
             lightOneColorSelector.CurrentColor = PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).lightOne.convertToUnityColor();
             lightTwoColorSelector.CurrentColor = PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).lightTwo.convertToUnityColor();
             wallColorSelector.CurrentColor = PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).wall.convertToUnityColor();
+        }
+
+        internal void enableOrDisableEditing(bool enabled)
+        {
+           
+            leftSaberColorSelector.editButton.enabled = enabled;
+            rightSaberColorSelector.editButton.enabled= enabled;
+            lightOneColorSelector.editButton.enabled = enabled;
+            lightTwoColorSelector.editButton.enabled = enabled;
+            wallColorSelector.editButton.enabled = enabled;
         }
     }
 }
