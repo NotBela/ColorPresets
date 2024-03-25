@@ -11,6 +11,18 @@ namespace ColorPresets.Views
     [ViewDefinition("ColorPresets.Views.GameplaySetup.bsml")]
     public class SetupTabController
     {
+
+        #region enableColorOverride
+
+        [UIValue("enableColorOverride")]
+        private bool enableColorOverride
+        {
+            get { return PluginConfig.Instance.enableColorOverride; }
+            set { PluginConfig.Instance.enableColorOverride = value; }
+        }
+
+        #endregion enableColorOverride
+
         #region PresetSelector
         [UIComponent("colorPresetsDropDown")]
         private DropDownListSetting list = new DropDownListSetting();
@@ -32,6 +44,21 @@ namespace ColorPresets.Views
         }
 
         #endregion PresetSelector
+
+        #region enablePresetEditingSwitch
+
+        [UIValue("enablePresetEditingSwitch")]
+        private bool enablePresetEditingSwitch
+        {
+            get { return PluginConfig.Instance.enablePresetEditing; }
+            set
+            {
+                PluginConfig.Instance.enablePresetEditing = value;
+                enableOrDisableEditing(value);
+            }
+        }
+
+        #endregion enablePresetEditingSwitch
 
         #region SaberColorValues
         [UIComponent("leftSaberColorSelector")]
@@ -110,20 +137,6 @@ namespace ColorPresets.Views
 
         }
         #endregion NewPresetButton
-
-        #region enablePresetEditingSwitch
-
-        [UIValue("enablePresetEditingSwitch")]
-        private bool enablePresetEditingSwitch
-        {
-            get { return PluginConfig.Instance.enablePresetEditing; }
-            set { 
-                PluginConfig.Instance.enablePresetEditing = value;
-                enableOrDisableEditing(value);
-            }
-        }
-
-        #endregion enablePresetEditingSwitch
 
         internal void updateList()
         {
