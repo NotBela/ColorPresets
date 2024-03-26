@@ -80,5 +80,14 @@ namespace ColorPresets.PresetConfig
             writeToPreset(tempPreset, presetName);
             // File.WriteAllText(JsonConvert.SerializeObject(tempPreset, Formatting.Indented), pathToPreset);
         }
+
+        public static void writeNameToPreset(string presetName, string name)
+        {
+            ColorPreset.ColorPreset tempPreset = readPreset(presetName);
+
+            tempPreset._name = name;
+
+            writeToPreset(tempPreset, presetName);
+        }
     }
 }

@@ -47,8 +47,8 @@ namespace ColorPresets.Views
 
         #region enablePresetEditingSwitch
 
-        [UIValue("enablePresetEditingSwitch")]
-        private bool enablePresetEditingSwitch
+        [UIValue("enablePresetEditing")]
+        private bool enablePresetEditing
         {
             get { return PluginConfig.Instance.enablePresetEditing; }
             set
@@ -122,7 +122,7 @@ namespace ColorPresets.Views
 
         #region nameEditingField
 
-        [UIValue("presetNameSetting")]
+        [UIValue("presetNameVal")]
         private string presetNameSetting
         {
             get { return PluginConfig.Instance.selectedPreset; }
@@ -134,8 +134,14 @@ namespace ColorPresets.Views
                     {
                         File.Move($"{PresetSaveLoader.pathToFolder}{PluginConfig.Instance.selectedPreset}.json", $"{PresetSaveLoader.pathToFolder}{value}.json");
                         PluginConfig.Instance.selectedPreset = value;
+
+                        PresetSaveLoader.writeNameToPreset(value, value);
+
                         updateList();
-                        list.dropdown.SelectCellWithIdx(listOptions.IndexOf(value));
+
+                        list.dropdown.SelectCellWithIdx(list.values.IndexOf(PluginConfig.Instance.selectedPreset));
+
+                        updateColors();
                     }
                     catch (Exception e)
                     {

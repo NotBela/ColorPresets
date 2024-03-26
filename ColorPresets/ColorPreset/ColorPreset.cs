@@ -64,6 +64,8 @@ namespace ColorPresets.ColorPreset
         public override string ToString()
         {
             return _name;
+
+            // the name field is basically just used to make toString work
         }
     }
 
