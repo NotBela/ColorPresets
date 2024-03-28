@@ -1,10 +1,12 @@
 ﻿using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.Components.Settings;
+using BeatSaberMarkupLanguage.Parser;
 using ColorPresets.Configuration;
 using ColorPresets.PresetConfig;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using UnityEngine;
 
 namespace ColorPresets.Views
 {
@@ -39,7 +41,7 @@ namespace ColorPresets.Views
             set {
                 updateList();
                 PluginConfig.Instance.selectedPreset = list.Value as string;
-                updateColors();
+                updateTabValues();
             }
         }
 
@@ -122,12 +124,21 @@ namespace ColorPresets.Views
 
         #region nameEditingField
 
+        [UIComponent("presetNameSetting")]
+        private StringSetting presetNameSetting = new StringSetting();
+
         [UIValue("presetNameVal")]
-        private string presetNameSetting
+        private string presetNameVal
         {
-            get { return PluginConfig.Instance.selectedPreset; }
+            get { 
+                // you can say many things about putting the editing enabler and disabler in the getter for the preset name
+                // you cannot say that it does not work
+                enableOrDisableEditing(PluginConfig.Instance.enablePresetEditing);
+                return PluginConfig.Instance.selectedPreset; 
+            }
             set
             {
+
                 if (!File.Exists($"{PresetSaveLoader.pathToFolder}{value}.json"))
                 {
                     try
@@ -141,13 +152,15 @@ namespace ColorPresets.Views
 
                         list.dropdown.SelectCellWithIdx(list.values.IndexOf(PluginConfig.Instance.selectedPreset));
 
-                        updateColors();
+                        // updateColors();
                     }
                     catch (Exception e)
                     {
                         Plugin.Log.Error($"An error occured renaming this preset: {e}");
                     }
                 }
+
+                updateTabValues();
             }
         }
 
@@ -166,7 +179,7 @@ namespace ColorPresets.Views
 
             list.dropdown.SelectCellWithIdx(list.values.IndexOf(nameOfSelected));
 
-            updateColors();
+            updateTabValues();
 
         }
         #endregion NewPresetButton
@@ -177,23 +190,25 @@ namespace ColorPresets.Views
             list.UpdateChoices();
         }  
 
-        internal void updateColors()
+        internal void updateTabValues()
         {
             leftSaberColorSelector.CurrentColor = PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).leftSaber.convertToUnityColor();
             rightSaberColorSelector.CurrentColor = PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).rightSaber.convertToUnityColor();
             lightOneColorSelector.CurrentColor = PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).lightOne.convertToUnityColor();
             lightTwoColorSelector.CurrentColor = PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).lightTwo.convertToUnityColor();
             wallColorSelector.CurrentColor = PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).wall.convertToUnityColor();
+            presetNameSetting.Text = PluginConfig.Instance.selectedPreset;
         }
 
-        internal void enableOrDisableEditing(bool enabled)
+        public void enableOrDisableEditing(bool enabled)
         {
-           
             leftSaberColorSelector.editButton.enabled = enabled;
             rightSaberColorSelector.editButton.enabled= enabled;
             lightOneColorSelector.editButton.enabled = enabled;
             lightTwoColorSelector.editButton.enabled = enabled;
             wallColorSelector.editButton.enabled = enabled;
+
+            presetNameSetting.gameObject.SetActive(enabled);
         }
     }
 }

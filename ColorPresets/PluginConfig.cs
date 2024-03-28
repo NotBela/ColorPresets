@@ -32,7 +32,7 @@ namespace ColorPresets.Configuration
         public virtual void OnReload()
         {
             
-            
+
         }
 
         /// <summary>
@@ -40,6 +40,8 @@ namespace ColorPresets.Configuration
         /// </summary>
         public virtual void Changed()
         {
+            
+
             // Do stuff when the config is changed.
             if (!isEnabled)
             {
@@ -49,6 +51,7 @@ namespace ColorPresets.Configuration
             {
                 SetupTabController setupTab = new SetupTabController();
                 GameplaySetup.instance.AddTab("ColorPresets", "ColorPresets.Views.GameplaySetup.bsml", setupTab, MenuType.All);
+                // setupTab.setPresetNameChangerActive(enablePresetEditing);
             }
         }
 
