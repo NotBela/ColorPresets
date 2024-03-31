@@ -15,6 +15,7 @@ Download the latest release and place the .dll file inside your plugins folder
 - Add a system to import color presets from beatmaps.
 - Add an easier way to import base game custom and OST color schemes.
 - Add a delete preset button
+- Fully replace the vanilla colors tab.
 
 ## Issues
 Feel free to open an an issue ticket or reach out to me on discord @be1a_
