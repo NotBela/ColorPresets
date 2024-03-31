@@ -1,6 +1,4 @@
 ﻿using Newtonsoft.Json;
-using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace ColorPresets.ColorPreset
 {
@@ -66,6 +64,24 @@ namespace ColorPresets.ColorPreset
             return _name;
 
             // the name field is basically just used to make toString work
+        }
+
+        public static ColorScheme convertToBaseGameScheme(ColorPreset preset)
+        {
+            return new ColorScheme(preset._name,
+                "",
+                true,
+                preset._name,
+                false,
+                preset.leftSaber.convertToUnityColor(),
+                preset.rightSaber.convertToUnityColor(),
+                preset.lightOne.convertToUnityColor(),
+                preset.lightTwo.convertToUnityColor(),
+                true,
+                preset.boostOne.convertToUnityColor(),
+                preset.boostTwo.convertToUnityColor(),
+                preset.wall.convertToUnityColor()
+            );
         }
     }
 
