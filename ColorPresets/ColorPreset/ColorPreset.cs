@@ -16,8 +16,8 @@ namespace ColorPresets.ColorPreset
         private static readonly Color defaultWall = new Color(.6588f, .1254f, .1254f);
         
         private static readonly Color defaultBoostOne = new Color(.6588f, .1254f, .1254f);
-        
-        private static readonly Color defaultBoostTwo = new Color(.6588f, .1254f, .1254f);
+
+        private static readonly Color defaultBoostTwo = new Color(.1882f, .5960f, 1.0f);
 
         public Color leftSaber { get; set; }
         

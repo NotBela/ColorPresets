@@ -54,12 +54,26 @@
 		/>
 
 		<color-setting
-			text="Wall"
+			text="Obstacles"
 			id="wallColorSelector"
 			value="wallColorVal"
 			apply-on-change="true"
 		/>
 
+		<color-setting
+			text="Boost Color One"
+			id="boostColorOneSelector"
+			value="boostColorOneVal"
+			apply-on-change="true"
+		/>
+
+		<color-setting
+			text="Boost Color Two"
+			id="boostColorTwoSelector"
+			value="boostColorTwoVal"
+			apply-on-change="true"
+		/>
+		
 		<string-setting
 			text="Preset Name"
 			id="presetNameSetting"

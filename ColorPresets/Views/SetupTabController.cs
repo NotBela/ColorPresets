@@ -117,7 +117,24 @@ namespace ColorPresets.Views
             set { PresetSaveLoader.writeColorToPreset("wall", PluginConfig.Instance.selectedPreset, ColorPreset.Color.convertFromUnityColor(wallColorSelector.CurrentColor)); }
         }
 
+        [UIComponent("boostColorOneSelector")]
+        private ColorSetting boostColorOneSelector;
 
+        [UIValue("boostColorOneVal")]
+        private UnityEngine.Color boostColorOneVal{
+            get { return PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).boostOne.convertToUnityColor(); }
+            set { PresetSaveLoader.writeColorToPreset("boostOne", PluginConfig.Instance.selectedPreset, ColorPreset.Color.convertFromUnityColor(boostColorOneSelector.CurrentColor)); }
+        }
+
+        [UIComponent("boostColorTwoSelector")]
+        private ColorSetting boostColorTwoSelector;
+
+        [UIValue("boostColorTwoVal")]
+        private UnityEngine.Color boostColorTwoVal
+        {
+            get { return PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).boostTwo.convertToUnityColor(); }
+            set { PresetSaveLoader.writeColorToPreset("boostTwo", PluginConfig.Instance.selectedPreset, ColorPreset.Color.convertFromUnityColor(boostColorTwoSelector.CurrentColor)); }
+        }
 
 
         #endregion SaberColorValues
@@ -197,6 +214,8 @@ namespace ColorPresets.Views
             lightOneColorSelector.CurrentColor = PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).lightOne.convertToUnityColor();
             lightTwoColorSelector.CurrentColor = PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).lightTwo.convertToUnityColor();
             wallColorSelector.CurrentColor = PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).wall.convertToUnityColor();
+            boostColorOneSelector.CurrentColor = PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).boostOne.convertToUnityColor();
+            boostColorTwoSelector.CurrentColor = PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).boostTwo.convertToUnityColor();
             presetNameSetting.Text = PluginConfig.Instance.selectedPreset;
         }
 
@@ -207,6 +226,8 @@ namespace ColorPresets.Views
             lightOneColorSelector.editButton.enabled = enabled;
             lightTwoColorSelector.editButton.enabled = enabled;
             wallColorSelector.editButton.enabled = enabled;
+            boostColorOneSelector.editButton.enabled = enabled;
+            boostColorTwoSelector.editButton.enabled = enabled;
 
             presetNameSetting.gameObject.SetActive(enabled);
         }
