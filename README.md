@@ -11,5 +11,10 @@ This mod completely remakes the existing color preset system in order to add mor
 ## Installation
 Download the latest release and place the .dll file inside your plugins folder
 
+## To-Do List
+- Add a system to import color presets from beatmaps.
+- Add an easier way to import base game custom and OST color schemes.
+- Add a delete preset button
+
 ## Issues
 Feel free to open an an issue ticket or reach out to me on discord @be1a_
