@@ -8,19 +8,19 @@ namespace ColorPresets.ColorPreset
     
     public class ColorPreset
     {
-        private static readonly Color defaultLeftSaber = new Color(.6588f, .1254f, .1254f);
+        public static readonly Color defaultLeftSaber = new Color(.6588f, .1254f, .1254f);
 
-        private static readonly Color defaultRightSaber = new Color(.1254f, .3921f, .6588f);
+        public static readonly Color defaultRightSaber = new Color(.1254f, .3921f, .6588f);
         
-        private static readonly Color defaultLightOne = new Color(.6588f, .1254f, .1254f);
+        public static readonly Color defaultLightOne = new Color(.6588f, .1254f, .1254f);
 
-        private static readonly Color defaultLightTwo = new Color(.1882f, .5960f, 1.0f);
+        public static readonly Color defaultLightTwo = new Color(.1882f, .5960f, 1.0f);
 
-        private static readonly Color defaultWall = new Color(.6588f, .1254f, .1254f);
+        public static readonly Color defaultWall = new Color(.6588f, .1254f, .1254f);
         
-        private static readonly Color defaultBoostOne = new Color(.6588f, .1254f, .1254f);
+        public static readonly Color defaultBoostOne = new Color(.6588f, .1254f, .1254f);
 
-        private static readonly Color defaultBoostTwo = new Color(.1882f, .5960f, 1.0f);
+        public static readonly Color defaultBoostTwo = new Color(.1882f, .5960f, 1.0f);
 
         public Color leftSaber { get; set; }
         
@@ -66,13 +66,13 @@ namespace ColorPresets.ColorPreset
         public ColorPreset(string name, Color leftSaber, Color rightSaber, Color lightOne, Color lightTwo, Color wall, Color boostOne, Color boostTwo)
         {
             _name = name;
-            this.leftSaber = leftSaber;
-            this.rightSaber = rightSaber;
-            this.lightOne = lightOne;
-            this.lightTwo = lightTwo;
-            this.wall = wall;  
-            this.boostOne = boostOne;
-            this.boostTwo = boostTwo;
+            this.leftSaber = leftSaber ?? defaultLeftSaber;
+            this.rightSaber = rightSaber ?? defaultRightSaber;
+            this.lightOne = lightOne ?? defaultLightOne;
+            this.lightTwo = lightTwo ?? defaultLightTwo;
+            this.wall = wall ?? defaultWall;  
+            this.boostOne = boostOne ?? defaultBoostOne;
+            this.boostTwo = boostTwo ?? defaultBoostTwo;
         }
 
         public override string ToString()

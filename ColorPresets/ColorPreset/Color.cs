@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SongCore.Data;
 
 namespace ColorPresets.ColorPreset
 {
@@ -20,13 +21,6 @@ namespace ColorPresets.ColorPreset
             this.b = b;
         }
 
-        public Color(SongCore.Data.ExtraSongData.MapColor color)
-        {
-            r = color.r;
-            g = color.g;
-            b = color.b;
-        }
-
         public UnityEngine.Color convertToUnityColor()
         {
             return new UnityEngine.Color(r, g, b, 1f);
@@ -41,6 +35,12 @@ namespace ColorPresets.ColorPreset
             return new Color(color.r, color.g, color.b);
         }
 
+        public static Color convertFromSongCore(ExtraSongData.MapColor color)
+        {
+            if (color == null) return null;
+
+            return new Color(color.r, color.g, color.b);
+        }
         
     }
 }

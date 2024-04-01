@@ -42,7 +42,7 @@ namespace ColorPresets.PresetConfig
         }
 
         public static void writeToPreset(ColorPreset.ColorPreset preset) {
-            File.WriteAllText(pathToFolder + preset + ".json", JsonConvert.SerializeObject(preset, Formatting.Indented)); // new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
+            File.WriteAllText(pathToFolder + preset._name + ".json", JsonConvert.SerializeObject(preset, Formatting.Indented)); // new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
         }
 
         public static ColorPreset.ColorPreset readPreset(string presetName)

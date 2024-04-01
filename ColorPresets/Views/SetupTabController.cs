@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using BS_Utils;
 using BS_Utils.Utilities;
+using System.Linq;
 
 namespace ColorPresets.Views
 {
@@ -223,7 +224,36 @@ namespace ColorPresets.Views
         [UIAction("importPresetFromBeatmapClicked")]
         private void importPresetFromBeatmap()
         {
-            Plugin.Log.Info(levelPreview.levelID);
+            var extraLevelData = SongCore.Collections.RetrieveExtraSongData(SongCore.Collections.hashForLevelID(levelPreview.levelID));
+            // top diff selected because it is most likely to have custom colors
+            // all diffs should have custom colors anyway but like idk
+            var topDiff = extraLevelData._difficulties[extraLevelData._difficulties.Length - 1];
+
+            var leftSaber = ColorPreset.Color.convertFromSongCore(topDiff._colorLeft) ?? ColorPreset.ColorPreset.defaultLeftSaber;
+            var rightSaber = ColorPreset.Color.convertFromSongCore(topDiff._colorRight) ?? ColorPreset.ColorPreset.defaultRightSaber;
+            var leftLight = ColorPreset.Color.convertFromSongCore(topDiff._envColorLeft) ?? ColorPreset.ColorPreset.defaultLightOne;
+            var rightLight = ColorPreset.Color.convertFromSongCore(topDiff._envColorLeft) ?? ColorPreset.ColorPreset.defaultLightTwo;
+            var obstacle = ColorPreset.Color.convertFromSongCore(topDiff._obstacleColor) ?? ColorPreset.ColorPreset.defaultWall;
+            var boostLeft = ColorPreset.Color.convertFromSongCore(topDiff._envColorLeftBoost) ?? ColorPreset.ColorPreset.defaultBoostOne;
+            var boostRight = ColorPreset.Color.convertFromSongCore(topDiff._envColorRightBoost) ?? ColorPreset.ColorPreset.defaultBoostTwo;
+
+            ColorPreset.ColorPreset songPreset = new ColorPreset.ColorPreset(
+                levelPreview.songName,
+                leftSaber,
+                rightSaber, 
+                leftLight,
+                rightLight,
+                obstacle,
+                boostLeft,
+                boostRight
+            );
+
+            PresetSaveLoader.writeToPreset(songPreset);
+            updateList();
+            PluginConfig.Instance.selectedPreset = songPreset._name;
+            list.dropdown.SelectCellWithIdx(list.values.IndexOf(PluginConfig.Instance.selectedPreset));
+            updateTabValues();
+
         }
 
         #endregion importPresetButton
