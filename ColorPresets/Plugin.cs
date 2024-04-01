@@ -41,6 +41,7 @@ namespace ColorPresets
             harmony = new Harmony("Bela.BeatSaber.ColorPresets");
             PresetSaveLoader.makeFolder();
             PluginConfig.Instance = conf.Generated<PluginConfig>();
+            
         }
         
         #region BSIPA Config

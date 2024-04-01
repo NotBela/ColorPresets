@@ -1,4 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using ColorPresets.Configuration;
+using Newtonsoft.Json;
+using System;
+using System.Runtime.CompilerServices;
 
 namespace ColorPresets.ColorPreset
 {
@@ -47,6 +50,18 @@ namespace ColorPresets.ColorPreset
             boostTwo = defaultBoostTwo;
         }
 
+        public ColorPreset(string name, ColorScheme scheme)
+        {
+            _name = name;
+            leftSaber = Color.convertFromUnityColor(scheme.saberAColor) ?? defaultLeftSaber;
+            rightSaber = Color.convertFromUnityColor(scheme.saberBColor) ?? defaultRightSaber;
+            lightOne = Color.convertFromUnityColor(scheme.environmentColor0) ?? defaultLightOne;
+            lightTwo = Color.convertFromUnityColor(scheme.environmentColor1) ?? defaultLightTwo;
+            wall = Color.convertFromUnityColor(scheme.obstaclesColor) ?? defaultWall;
+            boostOne = Color.convertFromUnityColor(scheme.environmentColor0Boost) ?? defaultBoostOne;
+            boostTwo = Color.convertFromUnityColor(scheme.environmentColor1Boost) ?? defaultBoostTwo;
+        }
+
         [JsonConstructor]
         public ColorPreset(string name, Color leftSaber, Color rightSaber, Color lightOne, Color lightTwo, Color wall, Color boostOne, Color boostTwo)
         {
@@ -59,6 +74,7 @@ namespace ColorPresets.ColorPreset
             this.boostOne = boostOne;
             this.boostTwo = boostTwo;
         }
+
         public override string ToString()
         {
             return _name;
@@ -83,6 +99,43 @@ namespace ColorPresets.ColorPreset
                 preset.wall.convertToUnityColor()
             );
         }
+        
+
+
+        //UNUSED
+        
+        /*
+        public static ColorPreset convertToColorPreset(string name, ColorScheme scheme)
+        {
+            var returnPreset = new ColorPreset(
+                name,
+                Color.convertFromUnityColor(scheme.saberAColor),
+                Color.convertFromUnityColor(scheme.saberBColor),
+                Color.convertFromUnityColor(scheme.environmentColor0),
+                Color.convertFromUnityColor(scheme.environmentColor1),
+                Color.convertFromUnityColor(scheme.obstaclesColor),
+                Color.convertFromUnityColor(scheme.environmentColor0Boost),
+                Color.convertFromUnityColor(scheme.environmentColor1Boost)
+            );
+
+            return returnPreset.replaceNullWithColor(ColorPresets.PresetConfig.PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset));
+        }
+        
+        public ColorPreset replaceNullWithColor(ColorPreset other)
+        {
+            var returnScheme = this;
+
+            this.leftSaber = this.leftSaber ?? other.leftSaber ?? throw new Exception("BothValsAreNull");
+            this.rightSaber = this.rightSaber ?? other.rightSaber ?? throw new Exception("BothValsAreNull");
+            this.lightOne = this.lightOne ?? other.lightOne ?? throw new Exception("BothValsAreNull");
+            this.lightTwo = this.lightTwo ?? other.lightTwo ?? throw new Exception("BothValsAreNull");
+            this.wall = this.wall ?? other.wall ?? throw new Exception("BothValsAreNull");
+            this.boostOne = this.boostOne ?? other.boostOne ?? throw new Exception("BothValsAreNull");
+            this.boostTwo = this.boostTwo ?? other.boostTwo ?? throw new Exception("BothValsAreNull");
+
+            return returnScheme;
+        }
+        */
     }
 
 }

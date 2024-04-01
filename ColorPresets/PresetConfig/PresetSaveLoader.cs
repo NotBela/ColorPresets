@@ -6,7 +6,7 @@ using System;
 
 namespace ColorPresets.PresetConfig
 {
-    public class PresetSaveLoader
+    public static class PresetSaveLoader
     {
         public static readonly string pathToFolder = UnityGame.InstallPath + "\\UserData\\ColorPresets\\";
 

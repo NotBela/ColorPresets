@@ -85,6 +85,13 @@
 			text="New Preset" 
 			on-click="newPresetButtonClicked"
 		/>
+
+		<button
+			text="Import From Beatmap"
+			id="importPresetFromBeatmapButton"
+			on-click="importPresetFromBeatmapClicked"
+			interactable="~importPresetFromBeatmapButtonInteractable"
+		/>
 	
 	</scrollable-settings-container>
 </bg>

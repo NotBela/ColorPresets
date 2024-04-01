@@ -1,18 +1,23 @@
 ﻿using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.Components.Settings;
-using BeatSaberMarkupLanguage.Parser;
 using ColorPresets.Configuration;
 using ColorPresets.PresetConfig;
+using JetBrains.Annotations;
+using SongCore.Data;
+using SongCore.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using UnityEngine;
+using BS_Utils;
+using BS_Utils.Utilities;
 
 namespace ColorPresets.Views
 {
     [ViewDefinition("ColorPresets.Views.GameplaySetup.bsml")]
     public class SetupTabController
     {
+
+        private IPreviewBeatmapLevel levelPreview;
 
         #region enableColorOverride
 
@@ -34,10 +39,10 @@ namespace ColorPresets.Views
 
         [UIValue("listChoice")]
         private object listChoice {
-            get { 
-                 return PluginConfig.Instance.selectedPreset;     
-                
-                }
+            get {
+                return PluginConfig.Instance.selectedPreset;
+
+            }
             set {
                 updateList();
                 PluginConfig.Instance.selectedPreset = list.Value as string;
@@ -121,7 +126,7 @@ namespace ColorPresets.Views
         private ColorSetting boostColorOneSelector;
 
         [UIValue("boostColorOneVal")]
-        private UnityEngine.Color boostColorOneVal{
+        private UnityEngine.Color boostColorOneVal {
             get { return PresetSaveLoader.readPreset(PluginConfig.Instance.selectedPreset).boostOne.convertToUnityColor(); }
             set { PresetSaveLoader.writeColorToPreset("boostOne", PluginConfig.Instance.selectedPreset, ColorPreset.Color.convertFromUnityColor(boostColorOneSelector.CurrentColor)); }
         }
@@ -147,11 +152,11 @@ namespace ColorPresets.Views
         [UIValue("presetNameVal")]
         private string presetNameVal
         {
-            get { 
+            get {
                 // you can say many things about putting the editing enabler and disabler in the getter for the preset name
                 // you cannot say that it does not work
                 enableOrDisableEditing(PluginConfig.Instance.enablePresetEditing);
-                return PluginConfig.Instance.selectedPreset; 
+                return PluginConfig.Instance.selectedPreset;
             }
             set
             {
@@ -201,6 +206,28 @@ namespace ColorPresets.Views
         }
         #endregion NewPresetButton
 
+        #region importPresetButton
+
+        [UIComponent("importPresetFromBeatmapButtonInteractable"), UsedImplicitly]
+        private bool importPresetFromBeatmapButtonInteractable
+        {
+            get
+            {
+                BSEvents.levelSelected += BSEvents_levelSelected;
+                return true;
+            }
+            set { } }
+        
+        
+
+        [UIAction("importPresetFromBeatmapClicked")]
+        private void importPresetFromBeatmap()
+        {
+            Plugin.Log.Info(levelPreview.levelID);
+        }
+
+        #endregion importPresetButton
+
         internal void updateList()
         {
             list.values = new List<object>(PresetSaveLoader.getListOfAllPresets());
@@ -230,6 +257,11 @@ namespace ColorPresets.Views
             boostColorTwoSelector.editButton.enabled = enabled;
 
             presetNameSetting.gameObject.SetActive(enabled);
+        }
+
+        private void BSEvents_levelSelected(LevelCollectionViewController arg1, IPreviewBeatmapLevel levelPreview)
+        {
+            this.levelPreview = levelPreview;
         }
     }
 }
