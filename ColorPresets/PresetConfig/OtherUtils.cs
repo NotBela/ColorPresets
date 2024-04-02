@@ -19,5 +19,22 @@ namespace ColorPresets.PresetConfig
                 count++;
             }
         }
+
+        public static string checkForNameInUse(string name)
+        {
+            int count = 2;
+
+            List<string> list = PresetSaveLoader.getListOfAllPresets();
+            if (!list.Contains(name))
+            {
+                return name;
+            }
+
+            while (true)
+            {
+                if (!list.Contains($"{name}{count}")) return $"{name}{count}";
+                count++;
+            }
+        }
     }
 }

@@ -15,6 +15,7 @@ using BeatSaberMarkupLanguage.Settings;
 using BeatSaberMarkupLanguage.GameplaySetup;
 using ColorPresets.Views;
 using ColorPresets.PresetConfig;
+using BS_Utils.Utilities;
 
 
 namespace ColorPresets
@@ -71,6 +72,8 @@ namespace ColorPresets
                 SetupTabController setupTab = new SetupTabController();
                 GameplaySetup.instance.AddTab("ColorPresets", "ColorPresets.Views.GameplaySetup.bsml", setupTab, MenuType.All);
             }
+
+
 
             Log.Info("ColorPresets loaded successfully");
         }

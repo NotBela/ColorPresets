@@ -90,7 +90,7 @@
 			text="Import From Beatmap"
 			id="importPresetFromBeatmapButton"
 			on-click="importPresetFromBeatmapClicked"
-			interactable="~importPresetFromBeatmapButtonInteractable"
+			interactable="false"
 		/>
 	
 	</scrollable-settings-container>

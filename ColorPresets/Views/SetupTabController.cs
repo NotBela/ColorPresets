@@ -11,6 +11,8 @@ using System.IO;
 using BS_Utils;
 using BS_Utils.Utilities;
 using System.Linq;
+using UnityEngine.UI;
+using UnityEngine;
 
 namespace ColorPresets.Views
 {
@@ -19,13 +21,23 @@ namespace ColorPresets.Views
     {
 
         private IPreviewBeatmapLevel levelPreview;
+        
+        private int topDiffIndex;
+
+        public SetupTabController()
+        {
+            BSEvents.levelSelected += BSEvents_levelSelected;
+        }
 
         #region enableColorOverride
 
         [UIValue("enableColorOverride")]
         private bool enableColorOverride
         {
-            get { return PluginConfig.Instance.enableColorOverride; }
+            get {
+                
+                return PluginConfig.Instance.enableColorOverride; 
+            }
             set { PluginConfig.Instance.enableColorOverride = value; }
         }
 
@@ -209,25 +221,17 @@ namespace ColorPresets.Views
 
         #region importPresetButton
 
-        [UIComponent("importPresetFromBeatmapButtonInteractable"), UsedImplicitly]
-        private bool importPresetFromBeatmapButtonInteractable
-        {
-            get
-            {
-                BSEvents.levelSelected += BSEvents_levelSelected;
-                return true;
-            }
-            set { } }
-        
-        
+        [UIComponent("importPresetFromBeatmapButton")]
+        public Button importPresetFromBeatmapButton;
 
         [UIAction("importPresetFromBeatmapClicked")]
-        private void importPresetFromBeatmap()
+        public void importPresetFromBeatmap()
         {
-            var extraLevelData = SongCore.Collections.RetrieveExtraSongData(SongCore.Collections.hashForLevelID(levelPreview.levelID));
+            ExtraSongData extraLevelData = SongCore.Collections.RetrieveExtraSongData(SongCore.Collections.hashForLevelID(this.levelPreview.levelID));
             // top diff selected because it is most likely to have custom colors
             // all diffs should have custom colors anyway but like idk
-            var topDiff = extraLevelData._difficulties[extraLevelData._difficulties.Length - 1];
+
+            ExtraSongData.DifficultyData topDiff = extraLevelData._difficulties[extraLevelData._difficulties.Length - 1];
 
             var leftSaber = ColorPreset.Color.convertFromSongCore(topDiff._colorLeft) ?? ColorPreset.ColorPreset.defaultLeftSaber;
             var rightSaber = ColorPreset.Color.convertFromSongCore(topDiff._colorRight) ?? ColorPreset.ColorPreset.defaultRightSaber;
@@ -238,7 +242,7 @@ namespace ColorPresets.Views
             var boostRight = ColorPreset.Color.convertFromSongCore(topDiff._envColorRightBoost) ?? ColorPreset.ColorPreset.defaultBoostTwo;
 
             ColorPreset.ColorPreset songPreset = new ColorPreset.ColorPreset(
-                levelPreview.songName,
+                OtherUtils.checkForNameInUse(levelPreview.songName),
                 leftSaber,
                 rightSaber, 
                 leftLight,
@@ -289,9 +293,21 @@ namespace ColorPresets.Views
             presetNameSetting.gameObject.SetActive(enabled);
         }
 
+        internal void setImportButtonEnabled()
+        {
+            ExtraSongData extraLevelData = SongCore.Collections.RetrieveExtraSongData(SongCore.Collections.hashForLevelID(levelPreview.levelID));
+            topDiffIndex = extraLevelData._difficulties.Length - 1;
+
+            bool beatMapHasColors = SongCore.Utilities.Utils.DiffHasColors(extraLevelData._difficulties[topDiffIndex]); //extraLevelData._colorSchemes == null;
+
+            importPresetFromBeatmapButton.interactable = beatMapHasColors;
+        }
+
         private void BSEvents_levelSelected(LevelCollectionViewController arg1, IPreviewBeatmapLevel levelPreview)
         {
             this.levelPreview = levelPreview;
+                
+            setImportButtonEnabled();
         }
     }
 }
