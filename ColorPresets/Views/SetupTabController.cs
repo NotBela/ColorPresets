@@ -300,7 +300,7 @@ namespace ColorPresets.Views
 
             bool beatMapHasColors = SongCore.Utilities.Utils.DiffHasColors(extraLevelData._difficulties[topDiffIndex]); //extraLevelData._colorSchemes == null;
 
-            importPresetFromBeatmapButton.interactable = beatMapHasColors;
+            if (importPresetFromBeatmapButton != null) importPresetFromBeatmapButton.interactable = beatMapHasColors;
         }
 
         private void BSEvents_levelSelected(LevelCollectionViewController arg1, IPreviewBeatmapLevel levelPreview)
